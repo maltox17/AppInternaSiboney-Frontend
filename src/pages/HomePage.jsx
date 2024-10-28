@@ -1,44 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { decodeToken, hasRole } from '../utils/utils'; 
 
 const HomePage = () => {
-  return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Welcome to the Employee Management App</h1>
-      <div style={styles.linksContainer}>
-        <Link to="/login" style={styles.linkButton}>Go to Login</Link>
-        <Link to="/empleado" style={styles.linkButton}>Go to Employee Page</Link>
-      </div>
-    </div>
-  );
-};
+  const navigate = useNavigate();
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    textAlign: 'center',
-  },
-  title: {
-    fontSize: '2rem',
-    marginBottom: '20px',
-  },
-  linksContainer: {
-    display: 'flex',
-    gap: '20px',
-  },
-  linkButton: {
-    padding: '10px 20px',
-    fontSize: '1rem',
-    textDecoration: 'none',
-    backgroundColor: '#007BFF',
-    color: 'white',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      console.warn("Token not found in localStorage.");
+      navigate('/login');
+      return;
+    }
+
+    // Redirige a la página adecuada según el rol del usuario
+    if (hasRole(token, 'ROLE_JEFE')) {
+      navigate('/jefe');
+    } else if (
+      hasRole(token, 'ROLE_CAMARERO') ||
+      hasRole(token, 'ROLE_COCINERO') ||
+      hasRole(token, 'ROLE_ENCARGADO')
+    ) {
+      navigate('/empleado');
+    } else {
+      console.warn("Unrecognized or missing role in token.");
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  return null; // No muestra contenido, solo redirige basado en el rol
 };
 
 export default HomePage;
