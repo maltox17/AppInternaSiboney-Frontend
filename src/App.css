@@ -12,7 +12,8 @@
 
 
 .card {
-  padding: 5em;
+  min-height: 93%;
+  text-align: center;
 }
 
 .read-the-docs {
@@ -47,3 +48,31 @@
   background: var(--secondary-color)
 }
 
+.jumbotron-background {
+  background-image: url('./assets/SiboneyBanner.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.jumbotron-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1;
+
+}
+
+.jumbotron-background h1,
+.jumbotron-background p {
+  position: relative;
+  z-index: 2;
+}

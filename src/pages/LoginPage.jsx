@@ -97,7 +97,7 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className="text-end">
-                <a href="#" className="text-decoration-none colorSecondary">Recuperar contraseña?</a>
+                <a href="#" className="text-decoration-none colorSecondary">Recuperar contraseña</a>
               </div>
             </div>
 

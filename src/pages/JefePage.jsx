@@ -24,21 +24,21 @@ const JefePage = () => {
   return (
     <div className="container my-5">
       {/* Bienvenida */}
-      <div className="jumbotron text-center py-5 text-white rounded bg-primary">
-        <h1>Bienvenido, {userName}</h1> 
-        <p className="lead">Panel de control de administración</p>
+      <div className="jumbotron text-center py-5 text-white rounded jumbotron-background">
+        <h1>Bienvenido</h1> 
+        <p className="lead">{userName}</p>
       </div>
 
       {/* Panel de Gestión */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Horarios</h5>
             <div className="card-body">
-              <h5 className="card-title">Horarios</h5>
               <p>Visualiza y gestiona los horarios semanales en un calendario o tabla.</p>
               <button
-                className="btn btn-outline-primary"
-                onClick={() => handleNavigation('/admin/horarios')}
+                className="btn btn-outline-secondary"
+                onClick={() => handleNavigation('/jefe/horarios')}
               >
                 Ir al Panel de Horarios
               </button>
@@ -47,12 +47,13 @@ const JefePage = () => {
         </div>
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Vacaciones</h5>
             <div className="card-body">
-              <h5 className="card-title">Vacaciones</h5>
+
               <p>Aprueba o rechaza solicitudes de vacaciones y visualiza el calendario de ausencias.</p>
               <button
-                className="btn btn-outline-success"
-                onClick={() => handleNavigation('/admin/vacaciones')}
+                className="btn btn-outline-success colorPrimary"
+                onClick={() => handleNavigation('/jefe/vacaciones')}
               >
                 Ir al Panel de Vacaciones
               </button>
@@ -65,12 +66,13 @@ const JefePage = () => {
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Empleados</h5>
             <div className="card-body">
-              <h5 className="card-title">Gestión de Empleados</h5>
+
               <p>Agrega, edita y elimina empleados de la base de datos.</p>
               <button
-                className="btn btn-outline-primary"
-                onClick={() => handleNavigation('/admin/empleados')}
+                className="btn btn-outline-success colorPrimary"
+                onClick={() => handleNavigation('/jefe/empleados')}
               >
                 Ir a Empleados
               </button>
@@ -79,12 +81,12 @@ const JefePage = () => {
         </div>
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Cafeterias</h5>
             <div className="card-body">
-              <h5 className="card-title">Centros de Trabajo</h5>
-              <p>Gestiona los centros de trabajo y sus datos asociados.</p>
+              <p>Gestiona las cafeterias</p>
               <button
-                className="btn btn-outline-primary"
-                onClick={() => handleNavigation('/admin/centros')}
+                className="btn btn-outline-success colorPrimary"
+                onClick={() => handleNavigation('/jefe/centros')}
               >
                 Ir a Centros
               </button>
@@ -97,12 +99,12 @@ const JefePage = () => {
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Horarios Fijos</h5>
             <div className="card-body">
-              <h5 className="card-title">Horarios Establecidos</h5>
               <p>Configura y revisa los horarios fijos para los empleados.</p>
               <button
-                className="btn btn-outline-primary"
-                onClick={() => handleNavigation('/admin/horariosEstablecidos')}
+                className="btn btn-outline-success colorPrimary"
+                onClick={() => handleNavigation('/jefe/horariosEstablecidos')}
               >
                 Ir a Horarios Establecidos
               </button>
@@ -111,12 +113,12 @@ const JefePage = () => {
         </div>
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Empleados - Centro </h5>
             <div className="card-body">
-              <h5 className="card-title">Relación Empleado-Centro</h5>
               <p>Asigna empleados a centros y gestiona su relación.</p>
               <button
-                className="btn btn-outline-primary"
-                onClick={() => handleNavigation('/admin/empleadosCentro')}
+                className="btn btn-outline-success colorPrimary"
+                onClick={() => handleNavigation('/jefe/empleadosCentro')}
               >
                 Ir a Empleado-Centro
               </button>
@@ -129,12 +131,12 @@ const JefePage = () => {
       <div className="row mt-4">
         <div className="col-md-12">
           <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Horas extras - deuda</h5>
             <div className="card-body">
-              <h5 className="card-title">Horas Extra / Deuda</h5>
               <p>Consulta las horas extras y deudas acumuladas por cada empleado.</p>
               <button
-                className="btn btn-outline-danger"
-                onClick={() => handleNavigation('/admin/horasExtrasDeuda')}
+                className="btn btn-outline-success colorPrimary"
+                onClick={() => handleNavigation('/jefe/horasExtrasDeuda')}
               >
                 Ver Horas Extras / Deuda
               </button>
