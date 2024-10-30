@@ -67,6 +67,8 @@ const CentrosPage = () => {
   return (
     <div className="container mt-5">
       <h2 className="text-center">Centros de Trabajo</h2>
+
+      {/* Tabla para dispositivos grandes */}
       <div className="table-responsive mt-4 d-none d-md-block">
         <Table striped bordered hover>
           <thead>
@@ -101,6 +103,29 @@ const CentrosPage = () => {
             ))}
           </tbody>
         </Table>
+      </div>
+
+      {/* Vista en cards para dispositivos móviles */}
+      <div className="d-block d-md-none">
+        {centros.map((centro) => (
+          <div key={centro.id} className="border rounded p-3 mb-3">
+            <p><strong>ID:</strong> {centro.id}</p>
+            <p><strong>Nombre:</strong> {centro.nombre}</p>
+            <p><strong>Dirección:</strong> {centro.direccion}</p>
+            <div className="d-flex justify-content-end">
+              <OverlayTrigger placement="top" overlay={<Tooltip>Editar centro</Tooltip>}>
+                <Button variant="warning" className="me-2" onClick={() => handleShowForm(centro)} size="sm">
+                  <FaEdit />
+                </Button>
+              </OverlayTrigger>
+              <OverlayTrigger placement="top" overlay={<Tooltip>Eliminar centro</Tooltip>}>
+                <Button variant="danger" onClick={() => handleDeleteCentro(centro.id)} size="sm">
+                  <FaTrash />
+                </Button>
+              </OverlayTrigger>
+            </div>
+          </div>
+        ))}
       </div>
 
       <Button onClick={() => handleShowForm()} className="mt-3 w-50 d-flex m-auto justify-content-center buttonBgPrimary">
@@ -148,3 +173,4 @@ const CentrosPage = () => {
 };
 
 export default CentrosPage;
+

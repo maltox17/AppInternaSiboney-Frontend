@@ -42,8 +42,8 @@ const EmpleadosPage = () => {
   // Esquema de validación usando Yup
   const validationSchema = Yup.object({
     nombre: Yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "Name can only contain letters") // Solo letras y espacios
-      .min(3, 'Name must be at least 3 characters') // Longitud mínima de 3 caracteres
+      .matches(/^[a-zA-Z\s]+$/, "Name can only contain letters")
+      .min(3, 'Name must be at least 3 characters')
       .required('Name is required'),
     email: Yup.string()
       .email('Invalid email format')
@@ -77,6 +77,8 @@ const EmpleadosPage = () => {
   return (
     <div className="container mt-5">
       <h2 className="text-center">Empleados</h2>
+
+      {/* Tabla para dispositivos grandes */}
       <div className="table-responsive mt-4 d-none d-md-block">
         <Table striped bordered hover>
           <thead>
@@ -97,15 +99,15 @@ const EmpleadosPage = () => {
                 <td>{empleado.telefono}</td>
                 <td>
                   <div> 
-                  <OverlayTrigger placement="top" overlay={<Tooltip>Editar empleado</Tooltip>}>
-                    <Button variant="warning" className="me-2 mb-2" onClick={() => handleShowForm(empleado)} size="sm" style={{marginTop: '4%'}}>
-                      <FaEdit />
-                    </Button>
+                    <OverlayTrigger placement="top" overlay={<Tooltip>Editar empleado</Tooltip>}>
+                      <Button variant="warning" className="me-2 mb-2" onClick={() => handleShowForm(empleado)} size="sm" style={{ marginTop: '4%' }}>
+                        <FaEdit />
+                      </Button>
                     </OverlayTrigger>
                     <OverlayTrigger placement="top" overlay={<Tooltip>Eliminar empleado</Tooltip>}>
-                    <Button variant="danger" onClick={() => handleDeleteEmpleado(empleado.id)} size="sm">
-                      <FaTrash />
-                    </Button>
+                      <Button variant="danger" onClick={() => handleDeleteEmpleado(empleado.id)} size="sm">
+                        <FaTrash />
+                      </Button>
                     </OverlayTrigger>
                   </div>                 
                 </td>
@@ -113,6 +115,30 @@ const EmpleadosPage = () => {
             ))}
           </tbody>
         </Table>
+      </div>
+
+      {/* Vista en cards para dispositivos móviles */}
+      <div className="d-block d-md-none">
+        {empleados.map((empleado) => (
+          <div key={empleado.id} className="border rounded p-3 mb-3">
+            <p><strong>ID:</strong> {empleado.id}</p>
+            <p><strong>Nombre:</strong> {empleado.nombre}</p>
+            <p><strong>Email:</strong> {empleado.email}</p>
+            <p><strong>Teléfono:</strong> {empleado.telefono}</p>
+            <div className="d-flex justify-content-end">
+              <OverlayTrigger placement="top" overlay={<Tooltip>Editar empleado</Tooltip>}>
+                <Button variant="warning" className="me-2" onClick={() => handleShowForm(empleado)} size="sm">
+                  <FaEdit />
+                </Button>
+              </OverlayTrigger>
+              <OverlayTrigger placement="top" overlay={<Tooltip>Eliminar empleado</Tooltip>}>
+                <Button variant="danger" onClick={() => handleDeleteEmpleado(empleado.id)} size="sm">
+                  <FaTrash />
+                </Button>
+              </OverlayTrigger>
+            </div>
+          </div>
+        ))}
       </div>
 
       <Button onClick={() => handleShowForm()} className="mt-3 w-50 d-flex m-auto justify-content-center buttonBgPrimary">
@@ -187,4 +213,5 @@ const EmpleadosPage = () => {
 };
 
 export default EmpleadosPage;
+
 

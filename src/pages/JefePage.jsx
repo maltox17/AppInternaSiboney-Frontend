@@ -53,7 +53,7 @@ const JefePage = () => {
               <p>Aprueba o rechaza solicitudes de vacaciones y visualiza el calendario de ausencias.</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
-                onClick={() => handleNavigation('/jefe/vacaciones')}
+                onClick={() => handleNavigation('/vacaciones/calendario')}
               >
                 Ir al Panel de Vacaciones
               </button>
