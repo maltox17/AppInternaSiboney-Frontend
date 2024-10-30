@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { hasRole, getUserInfo } from '../utils/utils';
 
-const EmpleadosPage = () => {
+const TrabajadorPage = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token || !hasRole(token, 'ROLE_JEFE')) {
+    if (!token || !hasRole(token, 'ROLE_CAMARERO')) {
       navigate('/');
       return;
     }
@@ -82,4 +82,4 @@ const EmpleadosPage = () => {
   );
 };
 
-export default EmpleadosPage;
+export default TrabajadorPage;

@@ -37,7 +37,7 @@ const JefePage = () => {
             <div className="card-body">
               <p>Visualiza y gestiona los horarios semanales en un calendario o tabla.</p>
               <button
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/horarios')}
               >
                 Ir al Panel de Horarios
@@ -52,7 +52,7 @@ const JefePage = () => {
 
               <p>Aprueba o rechaza solicitudes de vacaciones y visualiza el calendario de ausencias.</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/vacaciones')}
               >
                 Ir al Panel de Vacaciones
@@ -62,7 +62,7 @@ const JefePage = () => {
         </div>
       </div>
 
-      {/* Accesos Directos a CRUD */}
+ 
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
@@ -71,7 +71,7 @@ const JefePage = () => {
 
               <p>Agrega, edita y elimina empleados de la base de datos.</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/empleados')}
               >
                 Ir a Empleados
@@ -85,7 +85,7 @@ const JefePage = () => {
             <div className="card-body">
               <p>Gestiona las cafeterias</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/centros')}
               >
                 Ir a Centros
@@ -103,7 +103,7 @@ const JefePage = () => {
             <div className="card-body">
               <p>Configura y revisa los horarios fijos para los empleados.</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/horariosEstablecidos')}
               >
                 Ir a Horarios Establecidos
@@ -117,7 +117,7 @@ const JefePage = () => {
             <div className="card-body">
               <p>Asigna empleados a centros y gestiona su relación.</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/empleadosCentro')}
               >
                 Ir a Empleado-Centro
@@ -135,7 +135,7 @@ const JefePage = () => {
             <div className="card-body">
               <p>Consulta las horas extras y deudas acumuladas por cada empleado.</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/horasExtrasDeuda')}
               >
                 Ver Horas Extras / Deuda

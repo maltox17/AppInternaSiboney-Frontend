@@ -1,6 +1,6 @@
 :root {
   --primary-color: #2E5B57;  
-  --secondary-color: #fe8650; 
+  --secondary-color: #f7bb59; 
 
 }
 
@@ -21,7 +21,9 @@
 }
 
 
-
+btn-outline-success:hover{
+  background-color: #fe8650;
+}
 
 .logo-image {
   max-width: 100px; 
@@ -29,23 +31,37 @@
 }
 
 .buttonBgPrimary{
-  background: var(--primary-color)
+  background: var(--primary-color);
+}
+
+.buttonOutlinePrimary{
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: white;
+}
+
+.buttonOutlinePrimary:hover{
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+
 }
 
 .bgPrimary{
-  background: var(--primary-color)
+  background: var(--primary-color);
 }
 
 .bgSecondary{
-  background: var(--secondary-color)
+  background: var(--secondary-color);
 }
 
 .colorSecondary{
-  color: var(--secondary-color)
+  color: var(--secondary-color);
 }
 
 .buttonBgPrimary:hover{
-  background: var(--secondary-color)
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
 }
 
 .jumbotron-background {
