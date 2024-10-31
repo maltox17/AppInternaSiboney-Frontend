@@ -1,6 +1,6 @@
 :root {
   --primary-color: #2E5B57;  
-  --secondary-color: #f7bb59; 
+  --secondary-color: #812924; 
 
 }
 
@@ -91,4 +91,87 @@ btn-outline-success:hover{
 .jumbotron-background p {
   position: relative;
   z-index: 2;
+}
+
+
+
+.rbc-month-row {
+  min-height: 100px; /* Ajusta este valor según el tamaño que necesites */
+}
+
+.rbc-event {
+  font-size: 12px; /* Tamaño de fuente de los eventos */
+}
+
+.rbc-month-header{
+  background: var(--primary-color);
+  color: white;
+}
+
+.rbc-toolbar button{
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.calendar-selector{
+  background-color: white;
+  border: 0px;
+}
+
+.urderline{
+  border-bottom: 1px solid black;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+.rbc-toolbar .btn {
+  background-color: #822a26;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.rbc-toolbar .btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.rbc-toolbar .calendar-selector {
+  margin: 0 8px;
+  font-size: 16px;
+  padding: 4px 8px;
+  border: none;
+  border-bottom: 1px solid black;
+  background: transparent;
+}
+
+.rbc-toolbar-label {
+  display: flex;
+  align-items: center;
+}
+
+
+
+@media (max-width: 576px) {
+
+  .rbc-toolbar .calendar-selector {
+    font-size: 14px;
+  }
+
+
+  .rbc-toolbar {
+    flex-direction: row;
+  }
+
+  .rbc-toolbar .btn {
+    padding: 6px;
+    width: 30px;
+    height: 30px;
+  }
 }

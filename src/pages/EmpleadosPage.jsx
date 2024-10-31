@@ -61,10 +61,13 @@ const EmpleadosPage = () => {
 
   const handleFormSubmit = async (values, { resetForm }) => {
     try {
+      // Añadimos manualmente la clave por defecto la dejamos en siboney
+      const payload = { ...values, clave: 'siboney' };
+  
       if (currentEmpleado) {
-        await api.put(`/empleados/${currentEmpleado.id}`, values);
+        await api.put(`/empleados/${currentEmpleado.id}`, payload);
       } else {
-        await api.post('/empleados', values);
+        await api.post('/empleados', payload);
       }
       setShowForm(false);
       fetchEmpleados();
@@ -73,6 +76,7 @@ const EmpleadosPage = () => {
       console.error('Error al guardar el empleado:', error);
     }
   };
+  
 
   return (
     <div className="container mt-5">
@@ -99,16 +103,16 @@ const EmpleadosPage = () => {
                 <td>{empleado.telefono}</td>
                 <td>
                   <div> 
-                    <OverlayTrigger placement="top" overlay={<Tooltip>Editar empleado</Tooltip>}>
+                    
                       <Button variant="warning" className="me-2 mb-2" onClick={() => handleShowForm(empleado)} size="sm" style={{ marginTop: '4%' }}>
                         <FaEdit />
                       </Button>
-                    </OverlayTrigger>
-                    <OverlayTrigger placement="top" overlay={<Tooltip>Eliminar empleado</Tooltip>}>
+                    
+                    
                       <Button variant="danger" onClick={() => handleDeleteEmpleado(empleado.id)} size="sm">
                         <FaTrash />
                       </Button>
-                    </OverlayTrigger>
+                   
                   </div>                 
                 </td>
               </tr>

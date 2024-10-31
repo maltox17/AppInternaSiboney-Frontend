@@ -87,16 +87,16 @@ const CentrosPage = () => {
                 <td>{centro.direccion}</td>
                 <td>
                   <div>
-                    <OverlayTrigger placement="top" overlay={<Tooltip>Editar centro</Tooltip>}>
+
                       <Button variant="warning" className="me-2 mb-2" onClick={() => handleShowForm(centro)} size="sm" style={{ marginTop: '3%' }}>
                         <FaEdit />
                       </Button>
-                    </OverlayTrigger>
-                    <OverlayTrigger placement="top" overlay={<Tooltip>Eliminar centro</Tooltip>}>
+
+
                       <Button variant="danger" onClick={() => handleDeleteCentro(centro.id)} size="sm">
                         <FaTrash />
                       </Button>
-                    </OverlayTrigger>
+ 
                   </div>                 
                 </td>
               </tr>
@@ -113,16 +113,14 @@ const CentrosPage = () => {
             <p><strong>Nombre:</strong> {centro.nombre}</p>
             <p><strong>Dirección:</strong> {centro.direccion}</p>
             <div className="d-flex justify-content-end">
-              <OverlayTrigger placement="top" overlay={<Tooltip>Editar centro</Tooltip>}>
+
                 <Button variant="warning" className="me-2" onClick={() => handleShowForm(centro)} size="sm">
                   <FaEdit />
                 </Button>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Eliminar centro</Tooltip>}>
                 <Button variant="danger" onClick={() => handleDeleteCentro(centro.id)} size="sm">
                   <FaTrash />
                 </Button>
-              </OverlayTrigger>
+
             </div>
           </div>
         ))}

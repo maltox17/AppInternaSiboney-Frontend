@@ -47,15 +47,15 @@ const JefePage = () => {
         </div>
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Vacaciones</h5>
+          <h5 class="card-header text-center bgPrimary text-white">Calendario Vacaciones</h5>
             <div className="card-body">
 
-              <p>Aprueba o rechaza solicitudes de vacaciones y visualiza el calendario de ausencias.</p>
+              <p>Consulta el calendario de vacaciones</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/vacaciones/calendario')}
               >
-                Ir al Panel de Vacaciones
+                Ir al Calendario
               </button>
             </div>
           </div>
