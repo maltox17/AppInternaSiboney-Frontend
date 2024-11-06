@@ -85,7 +85,7 @@ const CustomToolbar = ({ date, onNavigate }) => {
   );
 };
 
-const CalendarioBase = ({ eventos, eventPropGetter }) => {
+const CalendarioVacacionesBase = ({ eventos, eventPropGetter }) => {
   return (
     <div>
       <Calendar
@@ -118,4 +118,4 @@ const CalendarioBase = ({ eventos, eventPropGetter }) => {
   );
 };
 
-export default CalendarioBase;
+export default CalendarioVacacionesBase;

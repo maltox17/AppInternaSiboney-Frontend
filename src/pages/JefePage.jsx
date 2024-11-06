@@ -38,7 +38,7 @@ const JefePage = () => {
               <p>Visualiza y gestiona los horarios semanales en un calendario o tabla.</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
-                onClick={() => handleNavigation('/jefe/horarios')}
+                onClick={() => handleNavigation('/jefe/horarios/calendarios')}
               >
                 Ir al Panel de Horarios
               </button>

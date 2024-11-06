@@ -158,6 +158,12 @@ btn-outline-success:hover{
 
 
 
+.react-calendar-timeline .rct-header-root{
+  background: var(--primary-color);
+}
+
+
+
 @media (max-width: 576px) {
 
   .rbc-toolbar .calendar-selector {
@@ -174,4 +180,34 @@ btn-outline-success:hover{
     width: 30px;
     height: 30px;
   }
+
+
+  
 }
+
+@media (max-width: 767px){
+  .rct-item{
+    min-width: 120px !important;
+    left: 490px !important;
+    background-color: #fe8650;
+  }
+
+
+}
+
+@media (max-width: 493px){
+  .rct-item{
+    min-width: 120px !important;
+    left: 390px !important;
+    background-color: #fe8650;
+  }
+}
+
+@media (max-width: 435px){
+  .rct-item{
+    min-width: 120px !important;
+    left: 270px !important;
+    background-color: #fe8650;
+  }
+}
+

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CalendarioBase from '../components/CalendarioBase';
+import CalendarioVacacionesBase from '../components/CalendarioVacacionesBase';
 import api from '../services/api';
 
 const CalendarioVacaciones = () => {
@@ -68,7 +68,7 @@ const CalendarioVacaciones = () => {
     <div className="container mt-5">
       <h2 className="text-center">Calendario de Vacaciones</h2>
       {/* Renderizamos el componente de calendario con los eventos */}
-      <CalendarioBase eventos={eventos} eventPropGetter={eventPropGetter} />
+      <CalendarioVacacionesBase eventos={eventos} eventPropGetter={eventPropGetter} />
     </div>
   );
 };
