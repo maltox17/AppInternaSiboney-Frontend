@@ -47,6 +47,13 @@ btn-outline-success:hover{
 
 }
 
+.buttonOutlinePrimary.active {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+
+}
+
 .bgPrimary{
   background: var(--primary-color);
 }
@@ -96,7 +103,7 @@ btn-outline-success:hover{
 
 
 .rbc-month-row {
-  min-height: 100px; /* Ajusta este valor según el tamaño que necesites */
+  min-height: 100px; 
 }
 
 .rbc-event {
@@ -162,9 +169,7 @@ btn-outline-success:hover{
   background: var(--primary-color);
 }
 
-.fc-license-message {
-  display: none !important;
-}
+
 
 
 /* Big calendar*/
@@ -191,6 +196,10 @@ btn-outline-success:hover{
 
 
 /*Full Calendar*/
+
+.fc-license-message {
+  display: none !important;
+}
 
 .fc .fc-button:not(:disabled) {
   cursor: pointer;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import CalendarioFullCalendar from '../components/CalendarioFullCalendar';
 import { Button } from 'react-bootstrap';
+import moment from 'moment';
 
 const HorariosPage = () => {
   const [centros, setCentros] = useState([]);
@@ -27,6 +28,25 @@ const HorariosPage = () => {
     ? horarios.filter(horario => horario.centroNombre === centroSeleccionado)
     : [];
 
+  const resources = [...new Set(horariosFiltrados.map(h => h.empleadoNombre))].map((empleadoNombre, index) => ({
+    id: String(index + 1),
+    title: empleadoNombre
+  }));
+
+  const events = horariosFiltrados.map((horario, index) => {
+    const startDate = moment(`${horario.fecha}T${horario.horaEntrada}`).format();
+    const endDate = moment(`${horario.fecha}T${horario.horaSalida}`).format();
+
+    return {
+      id: String(index + 1),
+      resourceId: resources.find(resource => resource.title === horario.empleadoNombre).id,
+      title: `${moment(horario.horaEntrada, 'HH:mm:ss').format('HH:mm')} - ${moment(horario.horaSalida, 'HH:mm:ss').format('HH:mm')}`,
+      start: startDate,
+      end: endDate,
+      backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : '#2E5B57'
+    };
+  });
+
   return (
     <div className="container mt-3 mb-3">
       <h2 className="text-center">Horarios</h2>
@@ -35,15 +55,15 @@ const HorariosPage = () => {
           <Button
             key={index}
             onClick={() => setCentroSeleccionado(centro)}
-            variant={centro === centroSeleccionado ? 'primary' : 'outline-primary'}
-            className="mx-1"
+            variant={centro === centroSeleccionado ? 'button' : 'outline'}
+            className={`mx-1 buttonOutlinePrimary ${centro === centroSeleccionado ? 'active' : ''}`}
           >
             {centro}
           </Button>
         ))}
       </div>
       {centroSeleccionado ? (
-        <CalendarioFullCalendar horarios={horariosFiltrados} /> 
+        <CalendarioFullCalendar resources={resources} events={events} />
       ) : (
         <p className="text-center">Seleccione un centro para ver los horarios</p>
       )}
