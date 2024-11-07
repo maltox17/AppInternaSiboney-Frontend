@@ -1,7 +1,6 @@
-// HorariosPage.js
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
-import CalendarioHTimeline from '../components/CalendarioHTimeline'; // Importamos el nuevo componente de Timeline
+import CalendarioFullCalendar from '../components/CalendarioFullCalendar';
 import { Button } from 'react-bootstrap';
 
 const HorariosPage = () => {
@@ -13,7 +12,6 @@ const HorariosPage = () => {
     const fetchHorarios = async () => {
       try {
         const response = await api.get('/horarios/nombres');
-        console.log('Datos de horarios recibidos:', response.data);
         setHorarios(response.data);
         const centrosUnicos = [...new Set(response.data.map(horario => horario.centroNombre))];
         setCentros(centrosUnicos);
@@ -29,12 +27,8 @@ const HorariosPage = () => {
     ? horarios.filter(horario => horario.centroNombre === centroSeleccionado)
     : [];
 
-  useEffect(() => {
-    console.log('Horarios filtrados para el centro seleccionado:', horariosFiltrados);
-  }, [horariosFiltrados]);
-
   return (
-    <div className="container mt-5">
+    <div className="container mt-3 mb-3">
       <h2 className="text-center">Horarios</h2>
       <div className="d-flex justify-content-center mb-4">
         {centros.map((centro, index) => (
@@ -49,7 +43,7 @@ const HorariosPage = () => {
         ))}
       </div>
       {centroSeleccionado ? (
-        <CalendarioHTimeline horarios={horariosFiltrados} /> // Usamos el nuevo componente de Timeline
+        <CalendarioFullCalendar horarios={horariosFiltrados} /> 
       ) : (
         <p className="text-center">Seleccione un centro para ver los horarios</p>
       )}
@@ -58,4 +52,3 @@ const HorariosPage = () => {
 };
 
 export default HorariosPage;
-

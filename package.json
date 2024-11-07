@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/resource-timeline": "^6.1.15",
     "appinternasiboney": "file:",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",

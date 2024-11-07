@@ -27,7 +27,7 @@ const CustomNavbar = () => {
         <img
           src={logoImage}
           alt="Logo"
-          style={{ width: '60px', height: 'auto' }} // Ajusta el tamaño del logo
+          style={{ width: '60px', height: 'auto' }}
         />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
