@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
-import CalendarioFullCalendar from '../components/CalendarioFullCalendar';
-import { Button } from 'react-bootstrap';
+import { Table, Button, Form } from 'react-bootstrap';
 import moment from 'moment';
 
 const HorariosPage = () => {
   const [centros, setCentros] = useState([]);
   const [horarios, setHorarios] = useState([]);
   const [centroSeleccionado, setCentroSeleccionado] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(moment()); // Fecha seleccionada
 
   useEffect(() => {
     const fetchHorarios = async () => {
@@ -24,33 +24,32 @@ const HorariosPage = () => {
     fetchHorarios();
   }, []);
 
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate);
+  };
+
+  const handlePreviousDay = () => {
+    setSelectedDate(prevDate => prevDate.clone().subtract(1, 'days'));
+  };
+
+  const handleNextDay = () => {
+    setSelectedDate(prevDate => prevDate.clone().add(1, 'days'));
+  };
+
   const horariosFiltrados = centroSeleccionado
     ? horarios.filter(horario => horario.centroNombre === centroSeleccionado)
     : [];
 
-  const resources = [...new Set(horariosFiltrados.map(h => h.empleadoNombre))].map((empleadoNombre, index) => ({
-    id: String(index + 1),
-    title: empleadoNombre
-  }));
-
-  const events = horariosFiltrados.map((horario, index) => {
-    const startDate = moment(`${horario.fecha}T${horario.horaEntrada}`).format();
-    const endDate = moment(`${horario.fecha}T${horario.horaSalida}`).format();
-
-    return {
-      id: String(index + 1),
-      resourceId: resources.find(resource => resource.title === horario.empleadoNombre).id,
-      title: `${moment(horario.horaEntrada, 'HH:mm:ss').format('HH:mm')} - ${moment(horario.horaSalida, 'HH:mm:ss').format('HH:mm')}`,
-      start: startDate,
-      end: endDate,
-      backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : '#2E5B57'
-    };
-  });
+  const empleadosConHorarioHoy = horariosFiltrados.filter(horario =>
+    moment(horario.fecha).isSame(selectedDate, 'day')
+  );
 
   return (
     <div className="container mt-3 mb-3">
       <h2 className="text-center">Horarios</h2>
-      <div className="d-flex justify-content-center mb-4">
+
+      {/* Selector de Centros */}
+      <div className="d-flex justify-content-center mb-3">
         {centros.map((centro, index) => (
           <Button
             key={index}
@@ -62,11 +61,79 @@ const HorariosPage = () => {
           </Button>
         ))}
       </div>
-      {centroSeleccionado ? (
-        <CalendarioFullCalendar resources={resources} events={events} />
-      ) : (
-        <p className="text-center">Seleccione un centro para ver los horarios</p>
-      )}
+
+      {/* Selector de Fecha */}
+      <div className="d-flex justify-content-center align-items-center mb-3">
+        <Button onClick={handlePreviousDay} variant="secondary" className="me-2 bgSecondary">&lt;</Button>
+
+        <Form.Select
+          value={selectedDate.date()}
+          onChange={(e) => handleDateChange(selectedDate.clone().date(parseInt(e.target.value)))}
+          className="me-2 selectDate"
+        >
+          {Array.from({ length: selectedDate.daysInMonth() }, (_, i) => {
+            const dayDate = selectedDate.clone().date(i + 1);
+            return (
+              <option key={i} value={i + 1}>
+                {`${i + 1} - ${dayDate.format('dddd')}`} {/* Muestra día de la semana */}
+              </option>
+            );
+          })}
+        </Form.Select>
+
+        <Form.Select
+          value={selectedDate.month()}
+          onChange={(e) => handleDateChange(selectedDate.clone().month(parseInt(e.target.value)))}
+          className="me-2 selectDate"
+        >
+          {moment.months().map((month, index) => (
+            <option key={index} value={index}>{month}</option>
+          ))}
+        </Form.Select>
+
+        <Form.Select
+          value={selectedDate.year()}
+          onChange={(e) => handleDateChange(selectedDate.clone().year(parseInt(e.target.value)))}
+          className="me-2 selectDate"
+        >
+          {Array.from({ length: 5 }, (_, i) => moment().year() - 2 + i).map(year => (
+            <option key={year} value={year}>{year}</option>
+          ))}
+        </Form.Select>
+
+        <Button onClick={handleNextDay} variant="secondary" className="ms-2 bgSecondary">&gt;</Button>
+      </div>
+
+      {/* Tabla de Horarios */}
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Empleado</th>
+            <th>Horario</th>
+          </tr>
+        </thead>
+        <tbody>
+          {empleadosConHorarioHoy.length > 0 ? (
+            empleadosConHorarioHoy.map((horario, index) => (
+              <tr key={index}>
+                <td>{horario.empleadoNombre}</td>
+                <td
+                  style={{
+                    backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : '#2E5B57',
+                    color: 'white'
+                  }}
+                >
+                  {`${horario.horaEntrada} - ${horario.horaSalida}`}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="2" className="text-center">No hay empleados con horarios para esta fecha</td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
     </div>
   );
 };

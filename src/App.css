@@ -306,6 +306,10 @@ btn-outline-success:hover{
     left: 270px !important;
     background-color: #fe8650;
   }
+
+  .selectDate{
+    font-size: 13px;
+  }
 }
 
 
