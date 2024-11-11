@@ -7,6 +7,7 @@ import JefePage from './pages/JefePage';
 import EmpleadosPage from './pages/EmpleadosPage';
 import CentrosPage from './pages/CentrosPage'
 import CalendarioVacacionesPage from './pages/CalendarioVacacionesPage'
+import SolicitudVacacionesPage from './pages/SolicitudVacacionesPage';
 import HorariosPage from './pages/HorariosPage'
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,11 +27,13 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/empleado" element={<TrabajadorPage />} />
+      <Route path="/empleado/vacaciones" element={<SolicitudVacacionesPage />} />
       <Route path="/jefe" element={<JefePage />} />
       <Route path="/jefe/empleados" element={<EmpleadosPage />} />
       <Route path="/jefe/centros" element={<CentrosPage />} />
       <Route path="/vacaciones/calendario" element={<CalendarioVacacionesPage />} />
       <Route path="/jefe/horarios/calendarios" element={<HorariosPage />} />
+
     </Routes>
     </>
   )

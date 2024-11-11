@@ -42,21 +42,21 @@ const EmpleadosPage = () => {
   // Esquema de validación usando Yup
   const validationSchema = Yup.object({
     nombre: Yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "Name can only contain letters")
-      .min(3, 'Name must be at least 3 characters')
-      .required('Name is required'),
+      .matches(/^[a-zA-Z\s]+$/, "El nombre solo puede contener letras")
+      .min(3, 'El nombre debe tener al menos 3 caracteres')
+      .required('Nombre es obligatorio'),
     email: Yup.string()
-      .email('Invalid email format')
-      .required('Email is required'),
+      .email('formato de email invalido')
+      .required('Email es obligatorio'),
     telefono: Yup.string()
-      .matches(/^[0-9]+$/, "Phone must be a valid number")
-      .min(9, 'Phone number must be at least 9 digits')
-      .required('Phone is required'),
+      .matches(/^[0-9]+$/, "El telefono debe tener un formato valido")
+      .min(9, 'El telefono debe tener al menos 9 caracteres')
+      .required('El telefono es obligatorio'),
     horasContrato: Yup.number()
-      .positive('Contract hours must be positive')
-      .integer('Contract hours must be an integer')
-      .required('Contract hours are required'),
-    rol: Yup.string().required('Role is required'),
+      .positive('Las horas de contrato deben ser positivas')
+      .integer('Las horas de contrato no pueden tener decimales')
+      .required('Horas de contrato obligatorias'),
+    rol: Yup.string().required('Rol es obligatorio'),
   });
 
   const handleFormSubmit = async (values, { resetForm }) => {

@@ -37,7 +37,7 @@ const TrabajadorPage = () => {
             <div className="card-body">
               <p>Visualiza tu horario de la semana</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/empleado/horarios')}
               >
                 Ir al Panel de Horarios
@@ -49,27 +49,41 @@ const TrabajadorPage = () => {
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Vacaciones</h5>
             <div className="card-body">
-              <p>Visualiza el calendario de vacaciones, solicita y ve el estado de tus vacaciones solicitadas</p>
+              <p>Visualiza el calendario de vacaciones </p>
               <button
-                className="btn btn-outline-success colorPrimary"
-                onClick={() => handleNavigation('/empleado/vacaciones')}
+                className="btn btn-outline-secondary buttonOutlinePrimary"
+                onClick={() => handleNavigation('/vacaciones/calendario')}
               >
-                Ir al Panel de Vacaciones
+                Ir Calendario
               </button>
             </div>
           </div>
         </div>
       </div>
 
-
       <div className="row mt-4">
-        <div className="col-md-12">
+        <div className="col-md-6">
+          <div className="card shadow-sm mb-4">
+          <h5 class="card-header text-center bgPrimary text-white">Solicitar y Consultar Vacaciones</h5>
+            <div className="card-body">
+              <p>Solicita vacaciones para que sean aprobadas y ve el estado de tus solicitudes</p>
+              <button
+                className="btn btn-outline-secondary buttonOutlinePrimary"
+                onClick={() => handleNavigation('/empleado/vacaciones')}
+              >
+                Ver Vacaciones
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6">
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Horas Extras</h5>
             <div className="card-body">
               <p>Consulta las horas extras y deudas acumuladas que tienes en la empresa</p>
               <button
-                className="btn btn-outline-success colorPrimary"
+                className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/empleado/horas')}
               >
                 Ver Horas Extras / Deuda
@@ -77,8 +91,15 @@ const TrabajadorPage = () => {
             </div>
           </div>
         </div>
+
       </div>
+
+
     </div>
+
+    
+
+    
   );
 };
 

@@ -32,8 +32,9 @@ export const getUserInfo = (token) => {
   if (decodedToken) {
     return {
       name: decodedToken.nombre || 'Usuario', 
-      email: decodedToken.sub || '',          
+      email: decodedToken.sub || '',
+      id: decodedToken.id || '',          
     };
   }
-  return { name: 'Usuario', email: '' };
+  return { name: 'Usuario', email: '', id: '' };
 };
