@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
-import { Table, Button, Form } from 'react-bootstrap';
+import { Table, Button, Form, Card } from 'react-bootstrap';
 import moment from 'moment';
 import { getUserInfo } from '../utils/utils';
 
 const TrabajadorHorarioPage = () => {
   const [horarios, setHorarios] = useState([]);
-  const [selectedWeek, setSelectedWeek] = useState(moment().startOf('week')); // Semana seleccionada (comienza en lunes)
+  const [selectedWeek, setSelectedWeek] = useState(moment().startOf('week')); // Semana seleccionada 
   const empleadoId = getUserInfo(localStorage.getItem('token')).id; // Obtener empleadoId del token
 
   useEffect(() => {
     const fetchHorarios = async () => {
       try {
-        const response = await api.get(`/horarios/empleados/${empleadoId}`);
+        const response = await api.get(`/horarios/empleado/${empleadoId}`);
         setHorarios(response.data);
       } catch (error) {
         console.error('Error al cargar los horarios:', error);
@@ -42,8 +42,8 @@ const TrabajadorHorarioPage = () => {
       day: day.format('dddd'),
       date: day.format('YYYY-MM-DD'),
       turno: horario ? horario.turno : 'SIN HORARIO',
-      horaEntrada: horario ? horario.horaEntrada : { hour: '--', minute: '--' },
-      horaSalida: horario ? horario.horaSalida : { hour: '--', minute: '--' }
+      horaEntrada: horario ? horario.horaEntrada : '--:--',
+      horaSalida: horario ? horario.horaSalida : '--:--'
     };
   });
 
@@ -93,36 +93,69 @@ const TrabajadorHorarioPage = () => {
         <Button onClick={handleNextWeek} variant="secondary" className="ms-2">&gt;</Button>
       </div>
 
-      {/* Tabla de Horarios Semanal */}
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Día</th>
-            <th>Fecha</th>
-            <th>Turno</th>
-            <th>Hora Entrada</th>
-            <th>Hora Salida</th>
-          </tr>
-        </thead>
-        <tbody>
-          {horariosSemana.map((horario, index) => (
-            <tr key={index}>
-              <td>{horario.day}</td>
-              <td>{horario.date}</td>
-              <td
-                style={{
-                  backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : horario.turno === "TARDE" ? '#2E5B57' : '#ccc',
-                  color: 'white'
-                }}
-              >
-                {horario.turno}
-              </td>
-              <td>{`${horario.horaEntrada.hour}:${horario.horaEntrada.minute}`}</td>
-              <td>{`${horario.horaSalida.hour}:${horario.horaSalida.minute}`}</td>
+      {/* Tabla de Horarios Semanal para pantallas grandes */}
+      <div className="d-none d-md-block">
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Día</th>
+              <th>Fecha</th>
+              <th>Turno</th>
+              <th>Hora Entrada</th>
+              <th>Hora Salida</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {horariosSemana.map((horario, index) => (
+              <tr key={index}>
+                <td>{horario.day}</td>
+                <td>{horario.date}</td>
+                <td
+                  style={{
+                    backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : horario.turno === "TARDE" ? '#2E5B57' : '#ccc',
+                    color: 'white'
+                  }}
+                >
+                  {horario.turno}
+                </td>
+                <td>{horario.horaEntrada}</td>
+                <td>{horario.horaSalida}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+
+      {/* Cards para pantallas pequeñas */}
+      <div className="d-md-none">
+        {horariosSemana.map((horario, index) => (
+          <Card className="mb-3" key={index}>
+            <Card.Body>
+              <Card.Title>{horario.day}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">{horario.date}</Card.Subtitle>
+              <Card.Text>
+                <strong>Turno:</strong>{' '}
+                <span
+                  style={{
+                    backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : horario.turno === "TARDE" ? '#2E5B57' : '#ccc',
+                    color: 'white',
+                    padding: '4px 8px',
+                    borderRadius: '4px'
+                  }}
+                >
+                  {horario.turno}
+                </span>
+              </Card.Text>
+              <Card.Text>
+                <strong>Hora Entrada:</strong> {horario.horaEntrada}
+              </Card.Text>
+              <Card.Text>
+                <strong>Hora Salida:</strong> {horario.horaSalida}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };

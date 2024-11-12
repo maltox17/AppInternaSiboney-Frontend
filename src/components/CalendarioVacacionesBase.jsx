@@ -61,13 +61,13 @@ const CustomToolbar = ({ date, onNavigate }) => {
 
       {/* Selectores de mes y año */}
       <div className="rbc-toolbar-label d-flex justify-content-center">
-        <select onChange={handleMonthChange} value={currentDate.getMonth()} className="calendar-selector mx-2 urderline">
+        <select onChange={handleMonthChange} value={currentDate.getMonth()} className="calendar-selector mx-2 urderline text-black">
           {Array.from({ length: 12 }, (_, i) => (
             <option key={i} value={i}>{moment().month(i).format("MMMM")}</option>
           ))}
         </select>
 
-        <select onChange={handleYearChange} value={currentDate.getFullYear()} className="calendar-selector mx-2 urderline">
+        <select onChange={handleYearChange} value={currentDate.getFullYear()} className="calendar-selector mx-2 urderline text-black">
           {Array.from({ length: 10 }, (_, i) => {
             const year = new Date().getFullYear() - 5 + i;
             return (

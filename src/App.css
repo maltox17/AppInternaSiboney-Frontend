@@ -190,126 +190,14 @@ btn-outline-success:hover{
     height: 30px;
   }
 
-
-  
 }
 
 
-/*Full Calendar*/
-
-.fc-license-message {
-  display: none !important;
-}
-
-.fc .fc-button:not(:disabled) {
-  cursor: pointer;
-  background: var(--secondary-color);
-}
-
-
-
-.fc .fc-timeline-slot-cushion {
-  color: var(--primary-color);
-  text-decoration: none;
-  
-}
-
-@media (max-width: 991px){
-
-  .fc-timeline-event-harness{
-    left: 0px !important;
+@media (max-width: 576px) {
+  .selectHorario {
+    font-size: 12px; /* Ajuste de tamaño de fuente */
   }
 
-  .fc .fc-timeline-slot-cushion {
-    color: white;
-  }
-
-
-
-}
-
-
-@media (max-width: 767px){
-
-  .rct-item{
-    min-width: 120px !important;
-    left: 490px !important;
-    background-color: #fe8650;
-  }
-
-   /* Estilo para el título centralizado y con un tamaño adecuado */
-   .fc .fc-toolbar-title {
-    font-size: 1.0rem; /* Tamaño de fuente más pequeño y consistente */
-    font-weight: bold;
-    text-align: center;
-    color: #333; /* Color de texto para mejor visibilidad */
-  }
-
-  /* Estilos para los botones de navegación (prev, next, today) */
-  .fc-toolbar .fc-button {
-    padding: 6px 12px; /* Ajusta el relleno interno para que los botones no se vean tan grandes */
-    font-size: 0.875rem; /* Tamaño de texto más pequeño y consistente */
-    border-radius: 4px; /* Bordes redondeados para consistencia */
-    margin: 0 4px; /* Espaciado horizontal entre los botones */
-    background-color: #4A5568; /* Color de fondo personalizado */
-    color: #fff;
-    border: none;
-  }
-
-  /* Cambia el color del botón en hover */
-  .fc-toolbar .fc-button:hover {
-    background-color: #2D3748; /* Color más oscuro en hover */
-  }
-
-  /* Botón activo (para day, week, month) */
-  .fc-button-active {
-    background-color: #2D3748 !important; /* Color de fondo para el botón activo */
-    font-weight: bold;
-  }
-
-  /* Ajuste para la barra de herramientas para centrar los elementos */
-  .fc-toolbar-chunk {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-
-
-}
-
-@media (max-width: 493px){
-  .rct-item{
-    min-width: 120px !important;
-    left: 390px !important;
-    background-color: #fe8650;
-  }
-
-
-  /* Reducir tamaño de botones para que todos entren */
-  .fc-toolbar .fc-button {
-    padding: 4px 8px; /* Relleno más pequeño */
-    font-size: 0.75rem; /* Texto más pequeño */
-    margin: 0 2px; /* Menor espacio entre los botones */
-  }
-
-  .fc .fc-toolbar-title {
-    font-size: 1.0em; /* Tamaño de fuente más pequeño y consistente */
-  }
-
-}
-
-@media (max-width: 435px){
-  .rct-item{
-    min-width: 120px !important;
-    left: 270px !important;
-    background-color: #fe8650;
-  }
-
-  .selectDate{
-    font-size: 13px;
-  }
 }
 
 

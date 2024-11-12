@@ -40,9 +40,9 @@ const HorariosPage = () => {
     ? horarios.filter(horario => horario.centroNombre === centroSeleccionado)
     : [];
 
-  const empleadosConHorarioHoy = horariosFiltrados.filter(horario =>
-    moment(horario.fecha).isSame(selectedDate, 'day')
-  );
+  const empleadosConHorarioHoy = horariosFiltrados
+    .filter(horario => moment(horario.fecha).isSame(selectedDate, 'day'))
+    .sort((a, b) => a.horaEntrada.localeCompare(b.horaEntrada)); // Ordena por hora de entrada
 
   return (
     <div className="container mt-3 mb-3">
@@ -69,7 +69,7 @@ const HorariosPage = () => {
         <Form.Select
           value={selectedDate.date()}
           onChange={(e) => handleDateChange(selectedDate.clone().date(parseInt(e.target.value)))}
-          className="me-2 selectDate"
+          className="calendar-selector mx-2 urderline text-black text-center selectHorario"
         >
           {Array.from({ length: selectedDate.daysInMonth() }, (_, i) => {
             const dayDate = selectedDate.clone().date(i + 1);
@@ -84,7 +84,7 @@ const HorariosPage = () => {
         <Form.Select
           value={selectedDate.month()}
           onChange={(e) => handleDateChange(selectedDate.clone().month(parseInt(e.target.value)))}
-          className="me-2 selectDate"
+          className="calendar-selector mx-2 urderline text-black text-center selectHorario"
         >
           {moment.months().map((month, index) => (
             <option key={index} value={index}>{month}</option>
@@ -94,7 +94,7 @@ const HorariosPage = () => {
         <Form.Select
           value={selectedDate.year()}
           onChange={(e) => handleDateChange(selectedDate.clone().year(parseInt(e.target.value)))}
-          className="me-2 selectDate"
+          className="calendar-selector mx-2 urderline text-black text-center selectHorario"
         >
           {Array.from({ length: 5 }, (_, i) => moment().year() - 2 + i).map(year => (
             <option key={year} value={year}>{year}</option>
