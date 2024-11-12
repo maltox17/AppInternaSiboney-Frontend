@@ -38,7 +38,7 @@ const TrabajadorPage = () => {
               <p>Visualiza tu horario de la semana</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
-                onClick={() => handleNavigation('/empleado/horarios')}
+                onClick={() => handleNavigation('/empleado/horario')}
               >
                 Ir al Panel de Horarios
               </button>

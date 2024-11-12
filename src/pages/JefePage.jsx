@@ -35,7 +35,7 @@ const JefePage = () => {
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Horarios</h5>
             <div className="card-body">
-              <p>Visualiza y gestiona los horarios semanales en un calendario o tabla.</p>
+              <p>Visualiza y gestiona los horarios semanales</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/horarios/calendarios')}
@@ -115,7 +115,7 @@ const JefePage = () => {
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Empleados - Centro </h5>
             <div className="card-body">
-              <p>Asigna empleados a centros y gestiona su relación.</p>
+              <p>Asigna empleados a centros</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/empleadosCentro')}
