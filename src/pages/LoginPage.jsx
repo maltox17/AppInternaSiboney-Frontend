@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true); // Estado para controlar la validez del email
+  const [isEmailValid, setIsEmailValid] = useState(true); 
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -17,7 +17,7 @@ const LoginPage = () => {
   };
 
   const handleEmailBlur = () => {
-    // Validar el email usando validator cuando el campo pierde el foco
+    // Validar el email cuando el campo pierde el foco
     setIsEmailValid(validator.isEmail(username));
   };
 
@@ -43,7 +43,9 @@ const LoginPage = () => {
       } else if (rol === 'ROLE_EMPLEADO') {
         navigate('/empleado');
       } else if (rol === 'ROLE_COCINERO') {
-        navigate('/cocinero');
+        navigate('/empleado');
+      } else if (rol === 'ROLE_ENCARGADO') {
+        navigate('/empleado');
       } else {
         navigate('/');
       }

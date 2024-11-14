@@ -23,13 +23,13 @@ const JefePage = () => {
 
   return (
     <div className="container my-5">
-      {/* Bienvenida */}
+      {/* Jumbotron */}
       <div className="jumbotron text-center py-5 text-white rounded jumbotron-background">
         <h1>Bienvenido</h1> 
         <p className="lead">{userName}</p>
       </div>
 
-      {/* Panel de Gestión */}
+      {/* Horarios */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
@@ -45,6 +45,8 @@ const JefePage = () => {
             </div>
           </div>
         </div>
+
+        {/* Calendario Vacaciones */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Calendario Vacaciones</h5>
@@ -62,7 +64,7 @@ const JefePage = () => {
         </div>
       </div>
 
- 
+      {/* Empleados */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
@@ -79,6 +81,8 @@ const JefePage = () => {
             </div>
           </div>
         </div>
+
+        {/* Cafeterias */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Cafeterias</h5>
@@ -95,7 +99,7 @@ const JefePage = () => {
         </div>
       </div>
 
-      {/* Panel de Gestión de Horarios Establecidos y Empleado-Centro */}
+      {/* Horarios Fijos */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
@@ -111,6 +115,8 @@ const JefePage = () => {
             </div>
           </div>
         </div>
+
+        {/* Establecer que empleados pertenecen a que centro de trabajo */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Empleados - Centro </h5>
@@ -127,7 +133,7 @@ const JefePage = () => {
         </div>
       </div>
 
-      {/* Panel de Horas Extras/Deuda */}
+      {/* Horas Extras o deudas*/}
       <div className="row mt-4">
         <div className="col-md-12">
           <div className="card shadow-sm mb-4">

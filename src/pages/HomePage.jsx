@@ -24,7 +24,7 @@ const HomePage = () => {
     ) {
       navigate('/empleado');
     } else {
-      console.warn("Unrecognized or missing role in token.");
+      console.warn("ha ocurrido un problema con el token");
       navigate('/login');
     }
   }, [navigate]);

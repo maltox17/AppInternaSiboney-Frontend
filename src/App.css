@@ -5,9 +5,9 @@
 }
 
 #root {
-  width: 100%;  /* Ocupa todo el ancho */
-  margin: 0;    /* Elimina el margen */
-  min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100%; 
+  margin: 0;    
+  min-height: 100vh; 
 }
 
 
@@ -195,7 +195,7 @@ btn-outline-success:hover{
 
 @media (max-width: 576px) {
   .selectHorario {
-    font-size: 12px; /* Ajuste de tamaño de fuente */
+    font-size: 12px; 
   }
 
 }

@@ -23,13 +23,13 @@ const TrabajadorPage = () => {
 
   return (
     <div className="container my-5">
-      {/* Bienvenida */}
+      {/* Jumbotron */}
       <div className="jumbotron text-center py-5 text-white rounded jumbotron-background">
         <h1>Bienvenido</h1> 
         <p className="lead">{userName}</p>
       </div>
 
-      {/* Panel de Gestión */}
+      {/* Horarios */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
@@ -45,6 +45,8 @@ const TrabajadorPage = () => {
             </div>
           </div>
         </div>
+
+         {/* Calendario Vacaciones */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Vacaciones</h5>
@@ -61,6 +63,7 @@ const TrabajadorPage = () => {
         </div>
       </div>
 
+      {/* Solicitar Vacaciones */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
@@ -77,6 +80,8 @@ const TrabajadorPage = () => {
           </div>
         </div>
 
+
+         {/* Horas Extras */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
           <h5 class="card-header text-center bgPrimary text-white">Horas Extras</h5>

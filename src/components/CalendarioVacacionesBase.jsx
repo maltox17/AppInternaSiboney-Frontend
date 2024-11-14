@@ -5,7 +5,7 @@ import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-// Configuración del idioma en español para moment.js con inicio de semana en lunes
+// Configuración del idioma en español para moment con inicio de semana en lunes
 moment.updateLocale('es', {
   months: [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -20,6 +20,7 @@ moment.updateLocale('es', {
   }
 });
 
+//Configuramos a moment nuestra ubicacion
 const localizer = momentLocalizer(moment);
 
 const CustomToolbar = ({ date, onNavigate }) => {
