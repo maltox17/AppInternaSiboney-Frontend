@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import api from '../services/api';
-import { getUserInfo } from '../utils/utils'; 
+import { getUserInfo } from '../utils/utils';
 
 const SolicitudVacacionesPage = () => {
   const [solicitudesVacaciones, setSolicitudesVacaciones] = useState([]);
@@ -10,22 +10,20 @@ const SolicitudVacacionesPage = () => {
     fechaFin: '',
     estado: 'PENDIENTE',
   });
-  const [mostrarModalConfirmacion, setMostrarModalConfirmacion] = useState(false); // Estado para controlar el modal
+  const [mostrarModalConfirmacion, setMostrarModalConfirmacion] = useState(false);
 
   // Obtener empleadoId desde el token
   const empleadoId = getUserInfo(localStorage.getItem('token')).id;
 
-  // useEffect para cargar las solicitudes de vacaciones cuando empleadoId esté disponible
   useEffect(() => {
     const obtenerMisVacaciones = async () => {
       try {
         if (empleadoId) {
           const response = await api.get(`/vacaciones/empleado/${empleadoId}`);
-          // Ordenamos las solicitudes por estado primero (pendiente) y luego por fecha de inicio de más reciente a más antigua
           const solicitudesOrdenadas = response.data.sort((a, b) => {
             if (a.estado === 'PENDIENTE' && b.estado !== 'PENDIENTE') return -1;
             if (a.estado !== 'PENDIENTE' && b.estado === 'PENDIENTE') return 1;
-            return new Date(b.fechaInicio) - new Date(a.fechaInicio); // Orden de fecha descendente
+            return new Date(b.fechaInicio) - new Date(a.fechaInicio);
           });
           setSolicitudesVacaciones(solicitudesOrdenadas);
         }
@@ -38,11 +36,10 @@ const SolicitudVacacionesPage = () => {
 
   const manejarSolicitudVacaciones = async () => {
     try {
-      const solicitudConEmpleadoId = { ...nuevaSolicitud, empleadoId }; // Incluir empleadoId en la solicitud
+      const solicitudConEmpleadoId = { ...nuevaSolicitud, empleadoId };
       const response = await api.post('/vacaciones', solicitudConEmpleadoId);
       setSolicitudesVacaciones((prevSolicitudes) => {
         const solicitudesActualizadas = [...prevSolicitudes, response.data];
-        // Ordenamos las solicitudes nuevamente después de añadir la nueva
         return solicitudesActualizadas.sort((a, b) => {
           if (a.estado === 'PENDIENTE' && b.estado !== 'PENDIENTE') return -1;
           if (a.estado !== 'PENDIENTE' && b.estado === 'PENDIENTE') return 1;
@@ -50,7 +47,6 @@ const SolicitudVacacionesPage = () => {
         });
       });
 
-      // Reiniciar los valores de fecha y cerrar el modal
       setNuevaSolicitud({
         fechaInicio: '',
         fechaFin: '',
@@ -70,9 +66,23 @@ const SolicitudVacacionesPage = () => {
     setMostrarModalConfirmacion(false);
   };
 
+  // Función para determinar el color de la fila según el estado
+  const getRowStyle = (estado) => {
+    switch (estado) {
+      case 'APROBADA':
+        return { backgroundColor: '#1d7a51', color: 'white' }; // Verde
+      case 'PENDIENTE':
+        return { backgroundColor: '#e6a522', color: 'white' }; // Amarillo
+      case 'RECHAZADA':
+        return { backgroundColor: '#b52219', color: 'white' }; // Rojo
+      default:
+        return {};
+    }
+  };
+
   return (
     <div className="container mt-3">
-      <h2 className='text-center'>Solicitar Vacaciones</h2>
+      <h2 className="text-center">Solicitar Vacaciones</h2>
       <Form className="mb-3">
         <Form.Group controlId="startDate">
           <Form.Label>Fecha de Inicio</Form.Label>
@@ -95,7 +105,7 @@ const SolicitudVacacionesPage = () => {
         </Button>
       </Form>
 
-      <h3 className='text-center mt-5 mb-4'>Mis Solicitudes</h3>
+      <h3 className="text-center mt-5 mb-4">Mis Solicitudes</h3>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -109,7 +119,7 @@ const SolicitudVacacionesPage = () => {
             <tr key={index}>
               <td>{solicitud.fechaInicio}</td>
               <td>{solicitud.fechaFin}</td>
-              <td>{solicitud.estado}</td>
+              <td style={getRowStyle(solicitud.estado)}>{solicitud.estado}</td>
             </tr>
           ))}
         </tbody>
