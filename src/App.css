@@ -62,6 +62,10 @@ btn-outline-success:hover{
   background: var(--secondary-color);
 }
 
+.colorPrimary{
+  color: var(--primary-color);
+}
+
 .colorSecondary{
   color: var(--secondary-color);
 }

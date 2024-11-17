@@ -10,6 +10,7 @@ import CalendarioVacacionesPage from './pages/CalendarioVacacionesPage'
 import SolicitudVacacionesPage from './pages/SolicitudVacacionesPage';
 import TrabajadorHorarioPage from './pages/TrabajadorHorarioPage';
 import EmpleadosCentroPage from './pages/EmpleadosCentroPage';
+import EmpleadoPage from './pages/EmpleadoPage'
 import HorariosPage from './pages/HorariosPage'
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -37,6 +38,10 @@ function App() {
       <Route path="/jefe/horarios/calendarios" element={<HorariosPage />} />
       <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />
       <Route path="/jefe/empleadosCentro" element={<EmpleadosCentroPage />} />
+      <Route path="/jefe/empleados/:idEmpleado" element={<EmpleadoPage />} />
+
+
+
 
     </Routes>
     </>
