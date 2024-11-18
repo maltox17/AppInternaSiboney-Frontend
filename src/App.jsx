@@ -10,6 +10,7 @@ import CalendarioVacacionesPage from './pages/CalendarioVacacionesPage'
 import SolicitudVacacionesPage from './pages/SolicitudVacacionesPage';
 import TrabajadorHorarioPage from './pages/TrabajadorHorarioPage';
 import EmpleadosCentroPage from './pages/EmpleadosCentroPage';
+import AprobarVacacionesPage from './pages/AprobarVacacionesPage'
 import EmpleadoPage from './pages/EmpleadoPage'
 import HorariosPage from './pages/HorariosPage'
 import HorariosEstablecidosPage from './pages/HorariosEstablecidosPage'
@@ -36,6 +37,7 @@ function App() {
       <Route path="/jefe/empleados" element={<EmpleadosPage />} />
       <Route path="/jefe/centros" element={<CentrosPage />} />
       <Route path="/vacaciones/calendario" element={<CalendarioVacacionesPage />} />
+      <Route path="/jefe/vacaciones/solicitudes" element={<AprobarVacacionesPage />} />
       <Route path="/jefe/horarios/calendarios" element={<HorariosPage />} />
       <Route path="/jefe/horariosEstablecidos" element={<HorariosEstablecidosPage />} />
       <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />

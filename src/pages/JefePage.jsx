@@ -25,7 +25,7 @@ const JefePage = () => {
     <div className="container my-5">
       {/* Jumbotron */}
       <div className="jumbotron text-center py-5 text-white rounded jumbotron-background">
-        <h1>Bienvenido</h1> 
+        <h1>Bienvenido</h1>
         <p className="lead">{userName}</p>
       </div>
 
@@ -33,7 +33,7 @@ const JefePage = () => {
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Horarios</h5>
+            <h5 className="card-header text-center bgPrimary text-white">Horarios</h5>
             <div className="card-body">
               <p>Visualiza y gestiona los horarios semanales</p>
               <button
@@ -49,9 +49,8 @@ const JefePage = () => {
         {/* Calendario Vacaciones */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Calendario Vacaciones</h5>
+            <h5 className="card-header text-center bgPrimary text-white">Calendario Vacaciones</h5>
             <div className="card-body">
-
               <p>Consulta el calendario de vacaciones</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
@@ -68,10 +67,9 @@ const JefePage = () => {
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Empleados</h5>
+            <h5 className="card-header text-center bgPrimary text-white">Empleados</h5>
             <div className="card-body">
-
-              <p>Agrega, edita y elimina empleados de la base de datos.</p>
+              <p>Gestiona tus empleados</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/empleados')}
@@ -82,12 +80,29 @@ const JefePage = () => {
           </div>
         </div>
 
-        {/* Cafeterias */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Cafeterias</h5>
+            <h5 className="card-header text-center bgPrimary text-white">Solicitudes Vacaciones</h5>
             <div className="card-body">
-              <p>Gestiona las cafeterias</p>
+              <p>Aprueba o rechaza solicitudes de vacaciones de los empleados.</p>
+              <button
+                className="btn btn-outline-secondary buttonOutlinePrimary"
+                onClick={() => handleNavigation('/jefe/vacaciones/solicitudes')}
+              >
+                Ver Solicitudes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Cafeterías y Horarios Establecidos */}
+      <div className="row mt-4">
+        <div className="col-md-6">
+          <div className="card shadow-sm mb-4">
+            <h5 className="card-header text-center bgPrimary text-white">Cafeterías</h5>
+            <div className="card-body">
+              <p>Gestiona las cafeterías</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/centros')}
@@ -97,13 +112,10 @@ const JefePage = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Horarios Establecidos */}
-      <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Horarios Fijos</h5>
+            <h5 className="card-header text-center bgPrimary text-white">Horarios Fijos</h5>
             <div className="card-body">
               <p>Configura y revisa los horarios fijos para los empleados.</p>
               <button
@@ -115,11 +127,13 @@ const JefePage = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Establecer que empleados pertenecen a que centro de trabajo */}
+      {/* Horas Extras o Deudas y Empleados-Centro */}
+      <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Empleados - Centro </h5>
+            <h5 className="card-header text-center bgPrimary text-white">Empleados - Centro</h5>
             <div className="card-body">
               <p>Asigna empleados a centros</p>
               <button
@@ -131,13 +145,10 @@ const JefePage = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Horas Extras o deudas*/}
-      <div className="row mt-4">
-        <div className="col-md-12">
+        <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Horas extras - deuda</h5>
+            <h5 className="card-header text-center bgPrimary text-white">Horas Extras - Deuda</h5>
             <div className="card-body">
               <p>Consulta las horas extras y deudas acumuladas por cada empleado.</p>
               <button
