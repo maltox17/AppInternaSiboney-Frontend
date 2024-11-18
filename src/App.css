@@ -75,6 +75,8 @@ btn-outline-success:hover{
   border-color: var(--secondary-color);
 }
 
+
+
 .jumbotron-background {
   background-image: url('./assets/SiboneyBanner.jpg'); 
   background-size: cover;

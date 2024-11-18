@@ -99,7 +99,7 @@ const JefePage = () => {
         </div>
       </div>
 
-      {/* Horarios Fijos */}
+      {/* Horarios Establecidos */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
