@@ -53,7 +53,7 @@ const TrabajadorHorarioPage = () => {
 
       {/* Selector de Fecha */}
       <div className="d-flex justify-content-center align-items-center mb-3">
-        <Button onClick={handlePreviousWeek} variant="secondary" className="me-2">&lt;</Button>
+        <Button onClick={handlePreviousWeek} variant="secondary" className="me-2 bgSecondary">&lt;</Button>
 
         <Form.Select
           value={selectedWeek.date()}
@@ -90,7 +90,7 @@ const TrabajadorHorarioPage = () => {
           ))}
         </Form.Select>
 
-        <Button onClick={handleNextWeek} variant="secondary" className="ms-2">&gt;</Button>
+        <Button onClick={handleNextWeek} variant="secondary" className="ms-2 bgSecondary">&gt;</Button>
       </div>
 
       {/* Tabla de Horarios Semanal para pantallas grandes */}

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import api from '../services/api';
 import { FaCheckCircle, FaRegTimesCircle, FaPauseCircle } from 'react-icons/fa';
-import CalendarioVacaciones from './CalendarioVacacionesPage'; // Importa el componente del calendario
+import CalendarioVacaciones from './CalendarioVacacionesPage'; 
 
 const AprobarVacacionesPage = () => {
   const [solicitudes, setSolicitudes] = useState([]);
   const [filtro, setFiltro] = useState('PENDIENTE'); // Por defecto, mostrar pendientes
-  const [recargarCalendario, setRecargarCalendario] = useState(false); // Estado para forzar recarga del calendario
+  const [recargarCalendario, setRecargarCalendario] = useState(false);
 
   useEffect(() => {
     const fetchSolicitudes = async () => {

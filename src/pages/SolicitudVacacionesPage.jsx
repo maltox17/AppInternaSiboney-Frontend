@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import api from '../services/api';
 import { getUserInfo } from '../utils/utils';
+import CalendarioVacaciones from './CalendarioVacacionesPage'; 
+
 
 const SolicitudVacacionesPage = () => {
   const [solicitudesVacaciones, setSolicitudesVacaciones] = useState([]);
+  const [recargarCalendario, setRecargarCalendario] = useState(false);
   const [nuevaSolicitud, setNuevaSolicitud] = useState({
     fechaInicio: '',
     fechaFin: '',
@@ -137,11 +140,15 @@ const SolicitudVacacionesPage = () => {
           <Button variant="secondary" onClick={cerrarModalConfirmacion}>
             Cancelar
           </Button>
-          <Button variant="primary" onClick={manejarSolicitudVacaciones}>
+          <Button variant="secondary" onClick={manejarSolicitudVacaciones} className='buttonBgPrimary'>
             Confirmar
           </Button>
         </Modal.Footer>
       </Modal>
+
+            {/* Componente de Calendario de Vacaciones */}
+            <CalendarioVacaciones/>
+
     </div>
   );
 };

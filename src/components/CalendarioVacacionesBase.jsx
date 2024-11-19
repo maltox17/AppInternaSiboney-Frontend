@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { Button, Modal } from 'react-bootstrap';
 
 // Configuración del idioma en español para moment con inicio de semana en lunes
 moment.updateLocale('es', {
@@ -53,6 +54,7 @@ const CustomToolbar = ({ date, onNavigate }) => {
     onNavigate('date', newDate);
   };
 
+
   return (
     <div className="rbc-toolbar d-flex justify-content-center align-items-center">
       {/* Botón de anterior */}
@@ -87,6 +89,15 @@ const CustomToolbar = ({ date, onNavigate }) => {
 };
 
 const CalendarioVacacionesBase = ({ eventos, eventPropGetter }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalEventos, setModalEventos] = useState([]);
+
+  // Manejar el clic en "Ver más"
+  const handleShowMore = (events) => {
+    setModalEventos(events); // Establece los eventos en el modal
+    setShowModal(true); // Muestra el modal
+  };
+
   return (
     <div>
       <Calendar
@@ -95,7 +106,7 @@ const CalendarioVacacionesBase = ({ eventos, eventPropGetter }) => {
         startAccessor="start"
         endAccessor="end"
         style={{ height: 642, marginBottom: 30 }}
-        views={[Views.MONTH, Views.WEEK, Views.DAY]}
+        views={[Views.MONTH]} // Solo vista mensual
         eventPropGetter={eventPropGetter}
         components={{
           toolbar: CustomToolbar, // Usamos el Toolbar personalizado
@@ -105,16 +116,39 @@ const CalendarioVacacionesBase = ({ eventos, eventPropGetter }) => {
           previous: 'Anterior',
           next: 'Siguiente',
           month: 'Mes',
-          week: 'Semana',
-          day: 'Día',
           date: 'Fecha',
-          time: 'Hora',
           event: 'Evento',
           noEventsInRange: 'No hay eventos en este rango',
           allDay: 'Todo el día',
           showMore: total => `+ Ver más (${total})`
         }}
+        onShowMore={handleShowMore} // Interceptar "Ver más"
       />
+
+      {/* Modal para mostrar eventos adicionales */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Empleados con vacaciones</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {modalEventos.length > 0 ? (
+            <ul>
+              {modalEventos.map((event, index) => (
+                <li key={index}>
+                  <strong>{event.title}</strong> - {moment(event.start).format('DD/MM/YYYY')} al {moment(event.end).format('DD/MM/YYYY')}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay eventos para mostrar.</p>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)} className='buttonBgPrimary'>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
