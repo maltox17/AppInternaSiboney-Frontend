@@ -5,21 +5,27 @@ import moment from 'moment';
 import { getUserInfo } from '../utils/utils';
 
 const TrabajadorHorarioPage = () => {
-  const [horarios, setHorarios] = useState([]);
-  const [selectedWeek, setSelectedWeek] = useState(moment().startOf('week')); // Semana seleccionada 
-  const empleadoId = getUserInfo(localStorage.getItem('token')).id; // Obtener empleadoId del token
+  const [horarios, setHorarios] = useState([]); // Inicializar como array vacío
+  const [selectedWeek, setSelectedWeek] = useState(moment().startOf('week')); // Semana seleccionada
+  const empleadoId = getUserInfo(localStorage.getItem('token'))?.id; // Obtener empleadoId del token
 
   useEffect(() => {
     const fetchHorarios = async () => {
       try {
         const response = await api.get(`/horarios/empleado/${empleadoId}`);
-        setHorarios(response.data);
+        // Asegurarse de que la respuesta sea un array
+        setHorarios(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error('Error al cargar los horarios:', error);
+        setHorarios([]); // En caso de error, asegurarse de que sea un array vacío
       }
     };
 
-    fetchHorarios();
+    if (empleadoId) {
+      fetchHorarios();
+    } else {
+      setHorarios([]); // Si no hay empleadoId, asegurarse de que sea un array vacío
+    }
   }, [empleadoId]);
 
   const handlePreviousWeek = () => {
@@ -34,16 +40,37 @@ const TrabajadorHorarioPage = () => {
     setSelectedWeek(moment(newDate).startOf('week'));
   };
 
-  // Filtra los horarios para la semana seleccionada (lunes a domingo)
+  // Filtra y agrupa los horarios para la semana seleccionada (lunes a domingo)
   const horariosSemana = Array.from({ length: 7 }, (_, i) => {
     const day = selectedWeek.clone().add(i, 'days');
-    const horario = horarios.find(h => moment(h.fecha).isSame(day, 'day'));
+    const horariosDia = horarios.filter(h => moment(h.fecha).isSame(day, 'day'));
+
+    if (horariosDia.length > 1) {
+      return {
+        day: day.format('dddd'),
+        date: day.format('YYYY-MM-DD'),
+        turno: 'PARTIDO',
+        horario: horariosDia.map(h => `${h.horaEntrada} - ${h.horaSalida}`).join(' / '),
+        centro: horariosDia.map(h => h.centroNombre).join(' / ')
+      };
+    }
+
+    if (horariosDia.length === 1) {
+      return {
+        day: day.format('dddd'),
+        date: day.format('DD/MM/YYYY'),
+        turno: horariosDia[0].turno,
+        horario: `${horariosDia[0].horaEntrada} - ${horariosDia[0].horaSalida}`,
+        centro: horariosDia[0].centroNombre
+      };
+    }
+
     return {
       day: day.format('dddd'),
-      date: day.format('YYYY-MM-DD'),
-      turno: horario ? horario.turno : 'SIN HORARIO',
-      horaEntrada: horario ? horario.horaEntrada : '--:--',
-      horaSalida: horario ? horario.horaSalida : '--:--'
+      date: day.format('DD/MM/YYYY'),
+      turno: 'SIN HORARIO',
+      horario: '--:--',
+      centro: '--'
     };
   });
 
@@ -101,8 +128,8 @@ const TrabajadorHorarioPage = () => {
               <th>Día</th>
               <th>Fecha</th>
               <th>Turno</th>
-              <th>Hora Entrada</th>
-              <th>Hora Salida</th>
+              <th>Horario</th>
+              <th>Centro</th>
             </tr>
           </thead>
           <tbody>
@@ -112,14 +139,16 @@ const TrabajadorHorarioPage = () => {
                 <td>{horario.date}</td>
                 <td
                   style={{
-                    backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : horario.turno === "TARDE" ? '#2E5B57' : '#ccc',
+                    backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' :
+                      horario.turno === "TARDE" ? '#2E5B57' :
+                        horario.turno === "PARTIDO" ? '#FFD700' : '#ccc',
                     color: 'white'
                   }}
                 >
                   {horario.turno}
                 </td>
-                <td>{horario.horaEntrada}</td>
-                <td>{horario.horaSalida}</td>
+                <td>{horario.horario}</td>
+                <td>{horario.centro}</td>
               </tr>
             ))}
           </tbody>
@@ -137,7 +166,9 @@ const TrabajadorHorarioPage = () => {
                 <strong>Turno:</strong>{' '}
                 <span
                   style={{
-                    backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' : horario.turno === "TARDE" ? '#2E5B57' : '#ccc',
+                    backgroundColor: horario.turno === "MAÑANA" ? '#ff9f89' :
+                      horario.turno === "TARDE" ? '#2E5B57' :
+                        horario.turno === "PARTIDO" ? '#FFD700' : '#ccc',
                     color: 'white',
                     padding: '4px 8px',
                     borderRadius: '4px'
@@ -147,10 +178,10 @@ const TrabajadorHorarioPage = () => {
                 </span>
               </Card.Text>
               <Card.Text>
-                <strong>Hora Entrada:</strong> {horario.horaEntrada}
+                <strong>Horario:</strong> {horario.horario}
               </Card.Text>
               <Card.Text>
-                <strong>Hora Salida:</strong> {horario.horaSalida}
+                <strong>Centro:</strong> {horario.centro}
               </Card.Text>
             </Card.Body>
           </Card>

@@ -40,7 +40,7 @@ const JefePage = () => {
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/horarios/calendarios')}
               >
-                Ir al Panel de Horarios
+                Ver Horarios
               </button>
             </div>
           </div>
@@ -56,7 +56,7 @@ const JefePage = () => {
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/vacaciones/calendario')}
               >
-                Ir al Calendario
+                Ver Calendario
               </button>
             </div>
           </div>
@@ -74,7 +74,7 @@ const JefePage = () => {
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/empleados')}
               >
-                Ir a Empleados
+                Ver Empleados
               </button>
             </div>
           </div>
@@ -107,7 +107,7 @@ const JefePage = () => {
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/centros')}
               >
-                Ir a Centros
+                Ver Centros
               </button>
             </div>
           </div>
@@ -122,14 +122,14 @@ const JefePage = () => {
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/horariosEstablecidos')}
               >
-                Ir a Horarios Establecidos
+                Ver Horarios Establecidos
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Horas Extras o Deudas y Empleados-Centro */}
+      {/* Empleados-Centro */}
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
@@ -140,12 +140,13 @@ const JefePage = () => {
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/jefe/empleadosCentro')}
               >
-                Ir a Empleado-Centro
+                Ver Empleado-Centro
               </button>
             </div>
           </div>
         </div>
 
+        {/* Horas Extras o Deudas  */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
             <h5 className="card-header text-center bgPrimary text-white">Horas Extras - Deuda</h5>

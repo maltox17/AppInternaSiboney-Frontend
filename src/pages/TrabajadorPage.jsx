@@ -8,7 +8,7 @@ const TrabajadorPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token || !hasRole(token, 'ROLE_CAMARERO')) {
+    if (!token) {
       navigate('/');
       return;
     }
@@ -40,7 +40,7 @@ const TrabajadorPage = () => {
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/empleado/horario')}
               >
-                Ir al Panel de Horarios
+                Ver Horarios
               </button>
             </div>
           </div>
@@ -49,14 +49,14 @@ const TrabajadorPage = () => {
          {/* Calendario Vacaciones */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Vacaciones</h5>
+          <h5 class="card-header text-center bgPrimary text-white">Calendario Vacaciones</h5>
             <div className="card-body">
               <p>Visualiza el calendario de vacaciones </p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
                 onClick={() => handleNavigation('/vacaciones/calendario')}
               >
-                Ir Calendario
+                Ver Calendario
               </button>
             </div>
           </div>
