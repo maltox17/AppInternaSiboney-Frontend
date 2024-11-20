@@ -190,6 +190,7 @@ const EmpleadosPage = () => {
       <Button
         onClick={() => handleShowForm()}
         className="mt-3 mb-5 w-50 d-flex m-auto justify-content-center buttonBgPrimary"
+        variant='secondary'
       >
         Crear Empleado
       </Button>
@@ -281,7 +282,7 @@ const EmpleadosPage = () => {
                   <ErrorMessage name="rol" component="div" className="text-danger" />
                 </Form.Group>
 
-                <Button type="submit" className="w-100 buttonBgPrimary">
+                <Button type="submit" className="w-100 buttonBgPrimary" variant='secondary'>
                   {currentEmpleado ? 'Actualizar' : 'Crear'}
                 </Button>
               </Form>

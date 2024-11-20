@@ -126,7 +126,7 @@ const CentrosPage = () => {
         ))}
       </div>
 
-      <Button onClick={() => handleShowForm()} className="mt-3 w-50 d-flex m-auto justify-content-center buttonBgPrimary">
+      <Button onClick={() => handleShowForm()} variant='secondary' className="mt-3 w-50 d-flex m-auto justify-content-center buttonBgPrimary">
         Crear Centro
       </Button>
 
@@ -158,7 +158,7 @@ const CentrosPage = () => {
                   <ErrorMessage name="direccion" component="div" className="text-danger" />
                 </Form.Group>
 
-                <Button type="submit" className="w-100 buttonBgPrimary">
+                <Button type="submit" className="w-100 buttonBgPrimary" variant='secondary'>
                   {currentCentro ? 'Actualizar' : 'Crear'}
                 </Button>
               </Form>

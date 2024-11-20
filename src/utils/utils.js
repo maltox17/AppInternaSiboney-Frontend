@@ -55,3 +55,20 @@ export const getUserInfo = (token) => {
   // Si el token no es válido, retornamos valores por defecto
   return { name: 'Usuario', email: '', id: '' };
 };
+
+export const getCentroEncargado = async (empleadoId) => {
+  try {
+    const response = await api.get(`/empleados-centro/empleado/${empleadoId}`);
+    const data = response.data;
+
+    // Retorna la información del centro si es encargado
+    if (data.esEncargado) {
+      return data.centroNombre;
+    }
+
+    return null; // No es encargado
+  } catch (error) {
+    console.error('Error al obtener el centro del encargado:', error);
+    return null;
+  }
+};
