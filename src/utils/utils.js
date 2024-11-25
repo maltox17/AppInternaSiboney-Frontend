@@ -1,126 +1,69 @@
+import axios from 'axios';
 import api from '../services/api';
 
-// Función para decodificar el token recibido de la API
+// Decodifica el token JWT
 export const decodeToken = (token) => {
   try {
-    // Obtenemos el payload del token
     const base64Url = token.split('.')[1];
-    
-    // Reemplazamos los caracteres específicos de Base64Url para convertirlo a un formato Base64 estándar
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    
-    // Decodificamos el Base64 en texto legible, luego lo transformamos de URI para asegurar que está en UTF-8
     const jsonPayload = decodeURIComponent(
       atob(base64)
         .split('')
         .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
         .join('')
     );
-
-    // Convertimos el texto decodificado en un objeto JSON para retornarlo
     return JSON.parse(jsonPayload);
   } catch (error) {
-
-    console.error("Fallo al decodificar el token:", error);
+    console.error('Error al decodificar el token:', error);
     return null;
   }
 };
 
-
+// Verifica si un token contiene un rol específico
 export const hasRole = (token, requiredRole) => {
-
   const decodedToken = decodeToken(token);
-  
-  // comprobamos si se tiene el rol requerido
-  if (decodedToken && decodedToken.rol) {
-    return decodedToken.rol === requiredRole;
-  }
-
-
-  return false;
+  return decodedToken?.rol === requiredRole || false;
 };
 
+// Verifica si un token es válido y contiene un rol permitido
+export const isTokenValid = (token, allowedRoles = []) => {
+  const decodedToken = decodeToken(token);
+  if (!decodedToken) return false;
 
+  const currentTime = Math.floor(Date.now() / 1000);
+  if (decodedToken.exp < currentTime) {
+    console.warn('Token expirado.');
+    localStorage.removeItem('token'); // Elimina el token del almacenamiento local
+    return false;
+  }
+
+  if (allowedRoles.length > 0 && !allowedRoles.includes(decodedToken.rol)) {
+    console.warn('Rol no autorizado.');
+    return false;
+  }
+
+  return true;
+};
+
+// obtener información del usuario desde el token
 export const getUserInfo = (token) => {
-
   const decodedToken = decodeToken(token);
-  
+  if (!decodedToken) return { name: 'Usuario', email: '', id: '' };
 
-  if (decodedToken) {
-    return {
-      name: decodedToken.nombre || 'Usuario', // Si no hay nombre, se usa 'Usuario' por defecto
-      email: decodedToken.sub || '',          
-      id: decodedToken.id || '',              
-    };
-  }
-
-  // Si el token no es válido, retornamos valores por defecto
-  return { name: 'Usuario', email: '', id: '' };
+  return {
+    name: decodedToken.nombre || 'Usuario',
+    email: decodedToken.sub || '',
+    id: decodedToken.id || '',
+    rol: decodedToken.rol || '',
+  };
 };
 
-export const getCentroEncargado = async (empleadoId) => {
-  try {
-    const response = await api.get(`/empleados-centro/empleado/${empleadoId}`);
-    const data = response.data;
-
-    // Retorna la información del centro si es encargado
-    if (data.esEncargado) {
-      return data.centroNombre;
-    }
-
-    return null; // No es encargado
-  } catch (error) {
-    console.error('Error al obtener el centro del encargado:', error);
-    return null;
-  }
-};
-
+//obtener información del centro del encargado
 export const getCentroEncId = async (empleadoId) => {
- try {
-    const response = await api.get(`/empleados-centro/empleado/${empleadoId}`);
-    const data = response.data;
-
-
-      const encargadoInfo = data[0];
-
-      if (encargadoInfo.esEncargado) {
-
-        return encargadoInfo.centroTrabajoId; // Devuelve el ID del centro
-      }
-    
-
-    return null;
-  } catch (error) {
-    console.error('Error al obtener el ID del centro del encargado:', error);
-    return null;
-  }
-};
-
-
-import axios from 'axios';
-
-export const getCentroEncIddd = async (empleadoId) => {
   try {
-    // Configuración de la URL base
-    const baseURL = 'http://localhost:8080/api'; // Sustituye con tu URL base de la API
-    const token = localStorage.getItem('token'); // Obtenemos el token de localStorage
-
-    // Configuración de Axios
-    const response = await axios.get(`${baseURL}/empleados-centro/empleado/${empleadoId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Incluimos el token en el encabezado
-      },
-    });
-
-    const data = response.data;
-
-    // Verificamos la información del encargado
-    const encargadoInfo = data[0];
-    if (encargadoInfo.esEncargado) {
-      return encargadoInfo.centroTrabajoId; // Devuelve el ID del centro
-    }
-
-    return null; // Retorna null si no es encargado
+    const response = await api.get(`/empleados-centro/empleado/${empleadoId}`);
+    const data = response.data[0];
+    return data?.esEncargado ? data.centroTrabajoId : null;
   } catch (error) {
     console.error('Error al obtener el ID del centro del encargado:', error);
     return null;

@@ -1,55 +1,63 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage'; 
 import LoginPage from './pages/LoginPage'; 
 import TrabajadorPage from './pages/TrabajadorPage'; 
 import JefePage from './pages/JefePage';
 import EmpleadosPage from './pages/EmpleadosPage';
-import CentrosPage from './pages/CentrosPage'
-import CalendarioVacacionesPage from './pages/CalendarioVacacionesPage'
+import CentrosPage from './pages/CentrosPage';
+import CalendarioVacacionesPage from './pages/CalendarioVacacionesPage';
 import SolicitudVacacionesPage from './pages/SolicitudVacacionesPage';
 import TrabajadorHorarioPage from './pages/TrabajadorHorarioPage';
 import EmpleadosCentroPage from './pages/EmpleadosCentroPage';
-import AprobarVacacionesPage from './pages/AprobarVacacionesPage'
-import EmpleadoPage from './pages/EmpleadoPage'
-import HorariosPage from './pages/HorariosPage'
-import HorariosEstablecidosPage from './pages/HorariosEstablecidosPage'
+import AprobarVacacionesPage from './pages/AprobarVacacionesPage';
+import EmpleadoPage from './pages/EmpleadoPage';
+import HorariosPage from './pages/HorariosPage';
+import HorariosEstablecidosPage from './pages/HorariosEstablecidosPage';
 import EncargadoHorariosPage from './pages/EncargadoHorariosPage';
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
 
-    
+      <>
+        <Navbar />
 
-    <>
-    <Navbar />
+        <Routes>
+          {/* Rutas públicas */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
 
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/empleado" element={<TrabajadorPage />} />
-      <Route path="/empleado/vacaciones" element={<SolicitudVacacionesPage />} />
-      <Route path="/jefe" element={<JefePage />} />
-      <Route path="/jefe/empleados" element={<EmpleadosPage />} />
-      <Route path="/jefe/centros" element={<CentrosPage />} />
-      <Route path="/vacaciones/calendario" element={<CalendarioVacacionesPage />} />
-      <Route path="/jefe/vacaciones/solicitudes" element={<AprobarVacacionesPage />} />
-      <Route path="/jefe/horarios/calendarios" element={<HorariosPage />} />
-      <Route path="/jefe/horariosEstablecidos" element={<HorariosEstablecidosPage />} />
-      <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />
-      <Route path="/jefe/empleadosCentro" element={<EmpleadosCentroPage />} />
-      <Route path="/jefe/empleados/:idEmpleado" element={<EmpleadoPage />} />
-      <Route path="/empleado/encargado/horarios" element={<EncargadoHorariosPage />} />
+          {/* Rutas protegidas para "ROLE_JEFE" */}
+          <Route element={<ProtectedRoute allowedRoles={['ROLE_JEFE']} />}>
+            <Route path="/jefe" element={<JefePage />} />
+            <Route path="/jefe/empleados" element={<EmpleadosPage />} />
+            <Route path="/jefe/centros" element={<CentrosPage />} />
+            <Route path="/jefe/vacaciones/solicitudes" element={<AprobarVacacionesPage />} />
+            <Route path="/jefe/horarios/calendarios" element={<HorariosPage />} />
+            <Route path="/jefe/horariosEstablecidos" element={<HorariosEstablecidosPage />} />
+            <Route path="/jefe/empleadosCentro" element={<EmpleadosCentroPage />} />
+            <Route path="/jefe/empleados/:idEmpleado" element={<EmpleadoPage />} />
+          </Route>
 
+          {/* Rutas protegidas para "ROLE_ENCARGADO" */}
+          <Route element={<ProtectedRoute allowedRoles={['ROLE_ENCARGADO']} />}>
+            <Route path="/empleado/encargado/horarios" element={<EncargadoHorariosPage />} />
+          </Route>
 
-    </Routes>
-    </>
-  )
+          {/* Rutas protegidas para cualquier rol */}
+          <Route element={<ProtectedRoute allowedRoles={['ROLE_CAMARERO', 'ROLE_COCINERO', 'ROLE_ENCARGADO']} />}>
+            <Route path="/empleado" element={<TrabajadorPage />} />
+            <Route path="/empleado/vacaciones" element={<SolicitudVacacionesPage />} />
+            <Route path="/vacaciones/calendario" element={<CalendarioVacacionesPage />} />
+            <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />
+          </Route>
+        </Routes>
+      </>
+
+  );
 }
 
-export default App
+export default App;

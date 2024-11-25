@@ -5,26 +5,26 @@ import moment from 'moment';
 import { getUserInfo } from '../utils/utils';
 
 const TrabajadorHorarioPage = () => {
-  const [horarios, setHorarios] = useState([]); // Inicializar como array vacío
-  const [selectedWeek, setSelectedWeek] = useState(moment().startOf('week')); // Semana seleccionada
-  const empleadoId = getUserInfo(localStorage.getItem('token'))?.id; // Obtener empleadoId del token
+  const [horarios, setHorarios] = useState([]); 
+  const [selectedWeek, setSelectedWeek] = useState(moment().startOf('week')); 
+  const empleadoId = getUserInfo(localStorage.getItem('token'))?.id; 
 
   useEffect(() => {
     const fetchHorarios = async () => {
       try {
         const response = await api.get(`/horarios/empleado/${empleadoId}`);
-        // Asegurarse de que la respuesta sea un array
+        
         setHorarios(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error('Error al cargar los horarios:', error);
-        setHorarios([]); // En caso de error, asegurarse de que sea un array vacío
+        setHorarios([]); // En caso de error, inicializamos un array vacío
       }
     };
 
     if (empleadoId) {
       fetchHorarios();
     } else {
-      setHorarios([]); // Si no hay empleadoId, asegurarse de que sea un array vacío
+      setHorarios([]); // Si no hay empleadoId, incializamos con un array vacío
     }
   }, [empleadoId]);
 
@@ -40,7 +40,7 @@ const TrabajadorHorarioPage = () => {
     setSelectedWeek(moment(newDate).startOf('week'));
   };
 
-  // Filtra y agrupa los horarios para la semana seleccionada (lunes a domingo)
+  // Filtrar y agrupar los horarios para la semana seleccionada
   const horariosSemana = Array.from({ length: 7 }, (_, i) => {
     const day = selectedWeek.clone().add(i, 'days');
     const horariosDia = horarios.filter(h => moment(h.fecha).isSame(day, 'day'));

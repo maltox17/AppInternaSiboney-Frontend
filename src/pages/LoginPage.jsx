@@ -57,7 +57,7 @@ const LoginPage = () => {
   return (
     <div className="container-fluid p-0">
       <div className="d-flex align-items-center justify-content-center vh-100">
-        <div className="card p-4" style={{ maxWidth: '600px', width: '100%' }}>
+        <div className="card p-4 m-1" style={{ maxWidth: '550px', width: '100%', minHeight: '500px' }}>
           <div className="text-center mb-4">
             <img src={logoImage} alt="Logo" className="logo-image mb-3" />
             <h2 className="fw-bold">Ingresa a tu cuenta</h2>

@@ -8,10 +8,7 @@ const JefePage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token || !hasRole(token, 'ROLE_JEFE')) {
-      navigate('/');
-      return;
-    }
+
     const { name } = getUserInfo(token);
     setUserName(name);
   }, [navigate]);
