@@ -84,7 +84,7 @@ const TrabajadorPage = () => {
          {/* Horas Extras */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4">
-          <h5 class="card-header text-center bgPrimary text-white">Horas Extras</h5>
+          <h5 class="card-header text-center bgPrimary text-white">Horas Extrasssss</h5>
             <div className="card-body">
               <p>Consulta las horas extras y deudas acumuladas que tienes en la empresa</p>
               <button
@@ -97,6 +97,25 @@ const TrabajadorPage = () => {
           </div>
         </div>
 
+      </div>
+
+      <div className="row mt-4">
+        <div className="col-md-12">
+          <div className="card shadow-sm mb-4">
+            <h5 className="card-header text-center bgPrimary text-white">
+              Encargado: Ver Horario del centro
+            </h5>
+            <div className="card-body">
+              <p>Mira el horario del personal de tu centro como encargado </p>
+              <button
+                className="btn btn-outline-secondary buttonOutlinePrimary"
+                onClick={() => handleNavigation('/empleado/encargado/horarios')}
+              >
+                Ver Horarios
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
 

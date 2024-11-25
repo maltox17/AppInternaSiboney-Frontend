@@ -14,6 +14,7 @@ import AprobarVacacionesPage from './pages/AprobarVacacionesPage'
 import EmpleadoPage from './pages/EmpleadoPage'
 import HorariosPage from './pages/HorariosPage'
 import HorariosEstablecidosPage from './pages/HorariosEstablecidosPage'
+import EncargadoHorariosPage from './pages/EncargadoHorariosPage';
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
@@ -43,8 +44,7 @@ function App() {
       <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />
       <Route path="/jefe/empleadosCentro" element={<EmpleadosCentroPage />} />
       <Route path="/jefe/empleados/:idEmpleado" element={<EmpleadoPage />} />
-
-
+      <Route path="/empleado/encargado/horarios" element={<EncargadoHorariosPage />} />
 
 
     </Routes>

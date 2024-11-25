@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import HorariosBase from '../components/HorariosBase';
 
 const HorariosPage = () => {
 
-  return (
-    
-    <HorariosBase/>
-  );
+
+  useEffect(() => {
+  }, []);
+
+  return <HorariosBase role="jefe" />;
 };
 
 export default HorariosPage;
