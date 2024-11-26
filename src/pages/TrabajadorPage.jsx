@@ -90,7 +90,7 @@ const TrabajadorPage = () => {
               <p>Consulta las horas extras y deudas acumuladas que tienes en la empresa</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
-                onClick={() => handleNavigation('/empleado/horas')}
+                onClick={() => handleNavigation('/empleado/horasExtras')}
               >
                 Ver Horas Extras / Deuda
               </button>

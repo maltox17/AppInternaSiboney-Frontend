@@ -151,7 +151,7 @@ const JefePage = () => {
               <p>Consulta las horas extras y deudas acumuladas por cada empleado.</p>
               <button
                 className="btn btn-outline-secondary buttonOutlinePrimary"
-                onClick={() => handleNavigation('/jefe/horasExtrasDeuda')}
+                onClick={() => handleNavigation('/jefe/horasExtras')}
               >
                 Ver Horas Extras / Deuda
               </button>

@@ -15,6 +15,8 @@ import EmpleadoPage from './pages/EmpleadoPage';
 import HorariosPage from './pages/HorariosPage';
 import HorariosEstablecidosPage from './pages/HorariosEstablecidosPage';
 import EncargadoHorariosPage from './pages/EncargadoHorariosPage';
+import HorasExtrasJefePage from './pages/HorasExtrasJefePage';
+import HorasExtrasEmpleadoPage from './pages/HorasExtrasEmpleadoPage';
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -40,6 +42,7 @@ function App() {
             <Route path="/jefe/horariosEstablecidos" element={<HorariosEstablecidosPage />} />
             <Route path="/jefe/empleadosCentro" element={<EmpleadosCentroPage />} />
             <Route path="/jefe/empleados/:idEmpleado" element={<EmpleadoPage />} />
+            <Route path="jefe/horasExtras" element={<HorasExtrasJefePage />} />
           </Route>
 
           {/* Rutas protegidas para "ROLE_ENCARGADO" */}
@@ -53,6 +56,7 @@ function App() {
             <Route path="/empleado/vacaciones" element={<SolicitudVacacionesPage />} />
             <Route path="/vacaciones/calendario" element={<CalendarioVacacionesPage />} />
             <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />
+            <Route path="empleado/horasExtras" element={<HorasExtrasEmpleadoPage />} />
           </Route>
         </Routes>
       </>
