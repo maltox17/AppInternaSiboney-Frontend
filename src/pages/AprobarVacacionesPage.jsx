@@ -66,7 +66,7 @@ const AprobarVacacionesPage = () => {
   );
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3 mb-3">
       <h2 className="text-center mb-4">Solicitudes de Vacaciones</h2>
 
       {/* Botones de filtro */}
