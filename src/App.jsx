@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
-import HomePage from './pages/HomePage'; 
-import LoginPage from './pages/LoginPage'; 
-import TrabajadorPage from './pages/TrabajadorPage'; 
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import TrabajadorPage from './pages/TrabajadorPage';
 import JefePage from './pages/JefePage';
 import EmpleadosPage from './pages/EmpleadosPage';
 import CentrosPage from './pages/CentrosPage';
@@ -24,42 +24,46 @@ import './App.css';
 function App() {
   return (
 
-      <>
-        <Navbar />
+    <>
+      <Navbar />
 
-        <Routes>
-          {/* Rutas públicas */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
+      <Routes>
+        {/* Rutas públicas */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
 
-          {/* Rutas protegidas para "ROLE_JEFE" */}
-          <Route element={<ProtectedRoute allowedRoles={['ROLE_JEFE']} />}>
-            <Route path="/jefe" element={<JefePage />} />
-            <Route path="/jefe/empleados" element={<EmpleadosPage />} />
-            <Route path="/jefe/centros" element={<CentrosPage />} />
-            <Route path="/jefe/vacaciones/solicitudes" element={<AprobarVacacionesPage />} />
-            <Route path="/jefe/horarios/calendarios" element={<HorariosPage />} />
-            <Route path="/jefe/horariosEstablecidos" element={<HorariosEstablecidosPage />} />
-            <Route path="/jefe/empleadosCentro" element={<EmpleadosCentroPage />} />
-            <Route path="/jefe/empleados/:idEmpleado" element={<EmpleadoPage />} />
-            <Route path="jefe/horasExtras" element={<HorasExtrasJefePage />} />
-          </Route>
+        {/* Rutas protegidas para "ROLE_JEFE" */}
+        <Route element={<ProtectedRoute allowedRoles={['ROLE_JEFE']} />}>
+          <Route path="/jefe" element={<JefePage />} />
+          <Route path="/jefe/empleados" element={<EmpleadosPage />} />
+          <Route path="/jefe/centros" element={<CentrosPage />} />
+          <Route path="/jefe/vacaciones/solicitudes" element={<AprobarVacacionesPage />} />
+          <Route path="/jefe/horarios/calendarios" element={<HorariosPage />} />
+          <Route path="/jefe/horariosEstablecidos" element={<HorariosEstablecidosPage />} />
+          <Route path="/jefe/empleadosCentro" element={<EmpleadosCentroPage />} />
+          <Route path="/jefe/empleados/:idEmpleado" element={<EmpleadoPage />} />
+          <Route path="jefe/horasExtras" element={<HorasExtrasJefePage />} />
+        </Route>
 
-          {/* Rutas protegidas para "ROLE_ENCARGADO" */}
-          <Route element={<ProtectedRoute allowedRoles={['ROLE_ENCARGADO']} />}>
-            <Route path="/empleado/encargado/horarios" element={<EncargadoHorariosPage />} />
-          </Route>
+        {/* Rutas protegidas para "ROLE_ENCARGADO" */}
+        <Route element={<ProtectedRoute allowedRoles={['ROLE_ENCARGADO']} />}>
+          <Route path="/empleado/encargado/horarios" element={<EncargadoHorariosPage />} />
+        </Route>
 
-          {/* Rutas protegidas para cualquier rol */}
-          <Route element={<ProtectedRoute allowedRoles={['ROLE_CAMARERO', 'ROLE_COCINERO', 'ROLE_ENCARGADO']} />}>
-            <Route path="/empleado" element={<TrabajadorPage />} />
-            <Route path="/empleado/vacaciones" element={<SolicitudVacacionesPage />} />
-            <Route path="/vacaciones/calendario" element={<CalendarioVacacionesPage />} />
-            <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />
-            <Route path="empleado/horasExtras" element={<HorasExtrasEmpleadoPage />} />
-          </Route>
-        </Routes>
-      </>
+        {/* Rutas protegidas para cualquier Rol */}
+        <Route element={<ProtectedRoute allowedRoles={['ROLE_CAMARERO', 'ROLE_COCINERO', 'ROLE_ENCARGADO', 'ROLE_JEFE']} />}>
+        <Route path="/vacaciones/calendario" element={<CalendarioVacacionesPage />} />
+        </Route>
+
+        {/* Rutas protegidas para rol de empleados */}
+        <Route element={<ProtectedRoute allowedRoles={['ROLE_CAMARERO', 'ROLE_COCINERO', 'ROLE_ENCARGADO']} />}>
+          <Route path="/empleado" element={<TrabajadorPage />} />
+          <Route path="/empleado/vacaciones" element={<SolicitudVacacionesPage />} />
+          <Route path="/empleado/horario" element={<TrabajadorHorarioPage />} />
+          <Route path="empleado/horasExtras" element={<HorasExtrasEmpleadoPage />} />
+        </Route>
+      </Routes>
+    </>
 
   );
 }
