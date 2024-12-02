@@ -53,7 +53,7 @@ const CrearHorarioModal = ({ show, handleClose, centroSeleccionado, fechaSelecci
             if (horario) {
                 setHoraEntrada(horario.horaEntrada);
                 setHoraSalida(horario.horaSalida);
-                setTurno(horario.turno); // Asignar el turno del horario establecido
+                setTurno(horario.turno); 
             }
         } else {
             setHoraEntrada('');
@@ -74,13 +74,13 @@ const CrearHorarioModal = ({ show, handleClose, centroSeleccionado, fechaSelecci
             horaEntrada,
             horaSalida,
             turno,
-            centroTrabajoId: centroSeleccionado, // Incluir el ID del centro
+            centroTrabajoId: centroSeleccionado, 
         };
 
         try {
             await api.post('/horarios', nuevoHorario); // Enviar horario al servidor
             onHorarioCreado(); // Notificar al componente padre que un horario fue creado
-            handleClose(); // Cerrar el modal
+            handleClose(); 
         } catch (error) {
             console.error('Error al crear el horario:', error);
         }
@@ -156,7 +156,7 @@ const CrearHorarioModal = ({ show, handleClose, centroSeleccionado, fechaSelecci
                 <Button variant="secondary" onClick={handleClose}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={handleSubmit}>
+                <Button variant="secondary" className='buttonBgPrimary' onClick={handleSubmit}>
                     Guardar
                 </Button>
             </Modal.Footer>

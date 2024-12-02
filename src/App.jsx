@@ -18,6 +18,8 @@ import EncargadoHorariosPage from './pages/EncargadoHorariosPage';
 import HorasExtrasJefePage from './pages/HorasExtrasJefePage';
 import HorasExtrasEmpleadoPage from './pages/HorasExtrasEmpleadoPage';
 import Navbar from './components/Navbar';
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -63,6 +65,9 @@ function App() {
           <Route path="empleado/horasExtras" element={<HorasExtrasEmpleadoPage />} />
         </Route>
       </Routes>
+
+      <ToastContainer />
+
     </>
 
   );

@@ -5,8 +5,10 @@ import moment from 'moment';
 import CrearHorarioModal from './CrearHorarioModal';
 import EliminarHorarioModal from './EliminarHorarioModal';
 import EditarHorarioModal from './EditarHorarioModal';
+import NotificarHorariosModal from './NotificarHorariosModal';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { getUserInfo, getCentroEncId } from '../utils/utils';
+import { toast } from 'react-toastify';
 
 const HorariosBase = ({ role }) => {
   const [centros, setCentros] = useState([]);
@@ -16,8 +18,9 @@ const HorariosBase = ({ role }) => {
   const [showCrearModal, setShowCrearModal] = useState(false);
   const [showEliminarModal, setShowEliminarModal] = useState(false);
   const [showEditarModal, setShowEditarModal] = useState(false);
+  const [showNotificarHorariosModal, setShowNotificarHorariosModal] = useState(false);
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
-  const [encargadoCentroId, setEncargadoCentroId] = useState(null); // ID del centro del encargado
+  const [encargadoCentroId, setEncargadoCentroId] = useState(null);
 
   useEffect(() => {
     const fetchCentrosYHorarios = async () => {
@@ -74,6 +77,10 @@ const HorariosBase = ({ role }) => {
     setShowEditarModal(true);
   };
 
+  const handleOpenNotificarModal = (horario) => {
+    setShowNotificarHorariosModal(true);
+  };
+
   const handleEliminarHorario = async (id) => {
     try {
       await api.delete(`/horarios/${id}`);
@@ -81,6 +88,28 @@ const HorariosBase = ({ role }) => {
       setShowEliminarModal(false);
     } catch (error) {
       console.error('Error al eliminar el horario:', error);
+      toast.error("Correos en proceso de envio");
+    }
+  };
+
+  const handleNotificarHorarios = async () => {
+
+    const email = {
+      asunto: "Nuevos horarios añadidos en Siboney",
+      mensaje: "Se han generado nuevos horarios en la app. Para consultarnos visita: http://localhost:5173/empleado/horario", 
+  };
+
+  setShowNotificarHorariosModal(false);
+  toast.info("Horarios en proceso de envio");
+  
+
+    try {
+      await api.post(`/email/masivo`, email);
+      toast.success("Horarios enviados");
+
+    } catch (error) {
+      console.error('Error al notificar por email los horarios:', error);
+      toast.error('Error al enviar los horarios.');
     }
   };
 
@@ -172,8 +201,11 @@ const HorariosBase = ({ role }) => {
 
           {role === 'jefe' && (
             <div className="d-flex justify-content-center mb-3">
-              <Button variant="secondary" className="buttonBgPrimary" onClick={() => setShowCrearModal(true)}>
+              <Button variant="secondary" className="m-1 buttonBgPrimary" onClick={() => setShowCrearModal(true)}>
                 Crear Horario
+              </Button>
+              <Button variant="secondary" className="m-1 buttonBgSecondary" onClick={() => setShowNotificarHorariosModal(true)}>
+                Enviar Horarios
               </Button>
             </div>
           )}
@@ -250,6 +282,11 @@ const HorariosBase = ({ role }) => {
             handleClose={() => setShowEditarModal(false)}
             handleEditar={handleEditarHorario}
             horario={horarioSeleccionado}
+          />
+          <NotificarHorariosModal
+            show={showNotificarHorariosModal}
+            handleClose={() => setShowNotificarHorariosModal(false)}
+            handleNotificarHorarios={handleNotificarHorarios}
           />
         </>
       )}

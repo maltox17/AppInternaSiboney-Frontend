@@ -34,6 +34,10 @@ btn-outline-success:hover{
   background: var(--primary-color);
 }
 
+.buttonBgSecondary{
+  background: var(--secondary-color);
+}
+
 .buttonOutlinePrimary{
   border-color: var(--primary-color);
   color: var(--primary-color);
@@ -75,6 +79,11 @@ btn-outline-success:hover{
   border-color: var(--secondary-color);
 }
 
+.buttonBgSecondary:hover{
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
 
 
 .jumbotron-background {
@@ -113,7 +122,7 @@ btn-outline-success:hover{
 }
 
 .rbc-event {
-  font-size: 12px; /* Tamaño de fuente de los eventos */
+  font-size: 12px; 
 }
 
 .rbc-month-header{
