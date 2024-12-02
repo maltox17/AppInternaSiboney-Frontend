@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import api from '../services/api';
 import { FaCheckCircle, FaRegTimesCircle, FaPauseCircle } from 'react-icons/fa';
-import CalendarioVacaciones from './CalendarioVacacionesPage'; 
+import CalendarioVacaciones from './CalendarioVacacionesPage';
+import { toast } from 'react-toastify'; 
 
 const AprobarVacacionesPage = () => {
   const [solicitudes, setSolicitudes] = useState([]);
@@ -45,7 +46,7 @@ const AprobarVacacionesPage = () => {
 
       // Usar api.put para enviar los datos
       await api.put(`/vacaciones/${id}`, payload);
-
+      
       // Actualizar la lista localmente
       setSolicitudes((prev) =>
         prev.map((solicitud) =>
@@ -55,6 +56,26 @@ const AprobarVacacionesPage = () => {
 
       // Forzar la recarga del calendario
       setRecargarCalendario((prev) => !prev); // Cambiar el estado para disparar una recarga
+
+      const email = {
+        empleadoId: solicitudActual.empleadoId,
+        asunto: `Solicitud de vacaciones ${nuevoEstado}`,
+        mensaje: `Tu solicitud de vacaciones del ${new Date(solicitudActual.fechaInicio).toLocaleDateString()}  al ${new Date(solicitudActual.fechaFin).toLocaleDateString()} tiene el siguiente resultado: ${nuevoEstado}. 
+        Consulta aqui: http://localhost:5173/empleado/vacaciones`, 
+    };
+
+    try {
+      await api.post(`/email/individual`, email);
+      toast.success(`Empleado ${solicitudActual.empleadoNombre} notificado de su solicitud: ${nuevoEstado}`);
+
+    } catch (error) {
+      console.error('Error al notificar por email al empleado de su solicitud:', error);
+      toast.error('Error al notificar al empleado de su solicitud de vacaciones');
+    }
+
+
+  
+
     } catch (error) {
       console.error('Error al actualizar el estado:', error);
     }
