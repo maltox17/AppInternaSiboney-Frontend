@@ -48,7 +48,7 @@ const TrabajadorHorarioPage = () => {
     if (horariosDia.length > 1) {
       return {
         day: day.format('dddd'),
-        date: day.format('YYYY-MM-DD'),
+        date: day.format('DD/MM/YYYY'),
         turno: 'PARTIDO',
         horario: horariosDia.map(h => `${h.horaEntrada} - ${h.horaSalida}`).join(' / '),
         centro: horariosDia.map(h => h.centroNombre).join(' / ')
