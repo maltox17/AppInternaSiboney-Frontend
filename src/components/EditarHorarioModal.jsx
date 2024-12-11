@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 const EditarHorarioModal = ({ show, handleClose, handleEditar, horario }) => {
-    const [horaEntrada, setHoraEntrada] = useState(horario?.horaEntrada || '');
-    const [horaSalida, setHoraSalida] = useState(horario?.horaSalida || '');
+    const [horaEntrada, setHoraEntrada] = useState('');
+    const [horaSalida, setHoraSalida] = useState('');
+    const [turno, setTurno] = useState(''); 
+
+    useEffect(() => {
+        setHoraEntrada(horario?.horaEntrada || '');
+        setHoraSalida(horario?.horaSalida || '');
+        setTurno(horario?.turno || ''); 
+    }, [horario]);
 
     const handleSubmit = () => {
         const updatedHorario = {
             ...horario,
             horaEntrada,
             horaSalida,
+            turno, 
         };
         handleEditar(updatedHorario);
     };
@@ -37,6 +45,17 @@ const EditarHorarioModal = ({ show, handleClose, handleEditar, horario }) => {
                             onChange={(e) => setHoraSalida(e.target.value)}
                         />
                     </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Turno</Form.Label>
+                        <Form.Select
+                            value={turno}
+                            onChange={(e) => setTurno(e.target.value)}
+                        >
+                            <option value="">Selecciona un turno</option>
+                            <option value="MAÑANA">Mañana</option>
+                            <option value="TARDE">Tarde</option>
+                        </Form.Select>
+                    </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -52,3 +71,5 @@ const EditarHorarioModal = ({ show, handleClose, handleEditar, horario }) => {
 };
 
 export default EditarHorarioModal;
+
+
